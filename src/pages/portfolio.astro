@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    label: 'Project One',
+    title: 'Service Business Rebrand',
+    text: 'A full redesign and rebuild for a local service business, focused on lead generation and a cleaner brand identity.',
+    tags: ['Web Design', 'Branding', 'SEO'],
+  },
+  {
+    label: 'Project Two',
+    title: 'Startup Landing Page',
+    text: 'A single, high-conversion landing page built for a product launch campaign, with the sign-up form above the fold.',
+    tags: ['Landing Page', 'Conversion Optimization'],
+  },
+  {
+    label: 'Project Three',
+    title: 'Local Business Site',
+    text: 'A multi-page marketing site with booking integration and local SEO improvements for a growing regional business.',
+    tags: ['Web Development', 'Local SEO'],
+  },
+];
+---
+
+<Layout
+  title="Portfolio"
+  description="A selection of web design and development projects from MGR Digital Studio."
+>
+  <section class="section">
+    <div class="container">
+      <div class="center" style="max-width: 640px; margin: 0 auto 56px;">
+        <span class="eyebrow">Portfolio</span>
+        <h1>A few projects we've shipped</h1>
+        <p>Placeholder case studies below — swap in real projects, screenshots, and results as they become available.</p>
+      </div>
+
+      <div class="grid grid-3">
+        {projects.map((project) => (
+          <div class="card">
+            <div class="thumb">{project.label}</div>
+            <h3>{project.title}</h3>
+            <p>{project.text}</p>
+            <div>
+              {project.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="cta-band" style="background: var(--color-hero-bg);">
+        <h2>Have a project in mind?</h2>
+        <p>Let's talk through what you need and what it would take to build it.</p>
+        <a href="/contact" class="btn btn-primary">Start a conversation</a>
+      </div>
+    </div>
+  </section>
+</Layout>

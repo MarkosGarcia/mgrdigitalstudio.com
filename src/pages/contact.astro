@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<Layout
+  title="Contact"
+  description="Get in touch with MGR Digital Studio for a free website quote."
+>
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: start; gap: 48px;">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h1>Let's talk about your project</h1>
+          <p>
+            Fill in the form and we'll reply within one business day with a
+            recommendation and a fixed-price quote. No obligation, no sales
+            calls unless you want one.
+          </p>
+
+          <div class="stack" style="margin-top: 32px;">
+            <div>
+              <strong>Email</strong>
+              <p><a href="mailto:hello@mgrdigitalstudio.com">hello@mgrdigitalstudio.com</a></p>
+            </div>
+            <div>
+              <strong>Response time</strong>
+              <p>Within 1 business day</p>
+            </div>
+          </div>
+        </div>
+
+        <ContactForm heading="Send us a message" subheading="We'll get back to you within 1 business day." />
+      </div>
+    </div>
+  </section>
+</Layout>
