@@ -129,6 +129,26 @@ should be updated with real content before it goes live for clients:
 - [ ] `About` page copy — personalize with real studio background.
 - [ ] Favicon (`public/favicon.svg`) — currently a simple "M" placeholder.
 
+## SEO notes
+
+The site is set up to target: web design, website design, landing page
+design, small business websites, conversion-focused websites, SEO, digital
+marketing, and Ottawa/Ontario/Canadian web design. Each page has a unique
+`<title>`/description (`src/pages/*.astro`), and `Layout.astro` injects a
+`ProfessionalService` JSON-LD schema with `areaServed` set to Ottawa,
+Ontario, and Canada.
+
+On-page keywords and schema markup only go so far for **local** search
+("Ottawa web design"). The highest-impact next steps, once you have a real
+business address/phone:
+
+- [ ] Create and verify a [Google Business Profile](https://www.google.com/business/) with a real address/phone, and add that same address/phone to the JSON-LD in `Layout.astro`.
+- [ ] Get listed in a few Ottawa/Ontario business directories (local citations) with identical name/address/phone.
+- [ ] Ask happy clients for Google reviews once you have some.
+
+None of that blocks launch — it's what turns on-page SEO into actual local
+rankings over the following weeks/months.
+
 ## Contact form spam protection
 
 The form uses a hidden honeypot field (`company_website`) — bots that fill

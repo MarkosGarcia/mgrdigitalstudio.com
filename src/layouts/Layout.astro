@@ -10,11 +10,34 @@ interface Props {
 
 const {
   title,
-  description = 'MGR Digital Studio designs and builds fast, conversion-focused websites for small businesses and startups.',
+  description = 'MGR Digital Studio designs conversion-focused websites, landing pages, and digital marketing for small businesses in Ottawa, Ontario, and across Canada.',
 } = Astro.props;
 
-const pageTitle = title === 'MGR Digital Studio' ? title : `${title} · MGR Digital Studio`;
+const pageTitle = title.includes('MGR Digital Studio') ? title : `${title} · MGR Digital Studio`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'MGR Digital Studio',
+  url: 'https://mgrdigitalstudio.com',
+  description:
+    'Web design, landing page design, SEO, and digital marketing for small businesses in Ottawa, Ontario, and across Canada.',
+  areaServed: [
+    { '@type': 'City', name: 'Ottawa' },
+    { '@type': 'AdministrativeArea', name: 'Ontario' },
+    { '@type': 'Country', name: 'Canada' },
+  ],
+  knowsAbout: [
+    'Web Design',
+    'Website Design',
+    'Landing Page Design',
+    'Small Business Websites',
+    'Conversion-Focused Websites',
+    'SEO',
+    'Digital Marketing',
+  ],
+};
 ---
 
 <!doctype html>
@@ -32,6 +55,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <Header />
