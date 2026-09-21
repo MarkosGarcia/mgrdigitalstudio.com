@@ -29,13 +29,13 @@ const projects = [
 >
   <section class="section">
     <div class="container">
-      <div class="center" style="max-width: 640px; margin: 0 auto 56px;">
+      <div class="center" style="max-width: 640px; margin: 0 auto 56px;" data-reveal>
         <span class="eyebrow">Portfolio</span>
         <h1>A few projects we've shipped</h1>
         <p>Placeholder case studies below — swap in real projects, screenshots, and results as they become available.</p>
       </div>
 
-      <div class="grid grid-3">
+      <div class="grid grid-3" data-reveal-group>
         {projects.map((project) => (
           <div class="card">
             <div class="thumb">{project.label}</div>
@@ -54,10 +54,10 @@ const projects = [
 
   <section class="section section-alt">
     <div class="container">
-      <div class="cta-band" style="background: var(--color-hero-bg);">
+      <div class="cta-band" data-reveal>
         <h2>Have a project in mind?</h2>
         <p>Let's talk through what you need and what it would take to build it.</p>
-        <a href="/contact" class="btn btn-primary">Start a conversation</a>
+        <a href="/contact" class="btn btn-primary magnetic">Start a conversation</a>
       </div>
     </div>
   </section>

@@ -12,5 +12,9 @@ node_modules/
 # logs
 npm-debug.log*
 
+# python bytecode (from ui-ux-pro-max skill scripts)
+__pycache__/
+*.pyc
+
 # editor/OS
 .DS_Store

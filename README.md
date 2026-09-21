@@ -7,6 +7,7 @@ deployed as a static site with a small serverless contact-form endpoint.
 ## Stack
 
 - **Astro** (static output) — fast, minimal-JS pages
+- **GSAP + ScrollTrigger** — the site's motion system (hero entrance, scroll reveals, parallax, magnetic buttons)
 - **Cloudflare Pages** — hosting (free, unlimited bandwidth, commercial use allowed)
 - **Cloudflare Pages Functions** (`functions/api/contact.js`) — handles the
   contact form server-side
@@ -101,8 +102,8 @@ In the Pages project → **Custom domains** → **Set up a custom domain**, add
 
 ```
 src/
-  layouts/Layout.astro       shared <head>, header, footer
-  components/                Header, Footer, ContactForm
+  layouts/Layout.astro       shared <head>, header, footer, site-wide motion script
+  components/                Header, Footer, ContactForm, Hero
   pages/                     index, services, about, portfolio, contact,
                               thank-you, blog/index, blog/[...slug]
   content/blog/*.md          blog posts (Astro content collections)
@@ -110,7 +111,25 @@ src/
   styles/global.css          design tokens + all site styles
 functions/api/contact.js     Cloudflare Pages Function: contact form handler
 public/                      favicon, robots.txt
+design-system/mgr-digital-studio/MASTER.md   the design system reference (colors,
+                              type, motion rules) — read this before changing the
+                              visual design, generated/maintained via the
+                              ui-ux-pro-max Claude Code skill in .claude/skills/
 ```
+
+## Design system
+
+The visual direction — dark cinematic/editorial, Playfair Display + Inter,
+gold accent, hairline-grid cards, GSAP scroll motion — is documented in
+[`design-system/mgr-digital-studio/MASTER.md`](design-system/mgr-digital-studio/MASTER.md).
+Read it before making visual changes; it also explains a scroll-reveal
+pitfall (opacity-based reveals hiding below-the-fold content from
+no-JS/crawler clients) that was found and fixed, so it isn't reintroduced.
+
+The `ui-ux-pro-max` skill (`.claude/skills/ui-ux-pro-max/`) is a searchable
+local database of UI styles, color palettes, typography pairings, and GSAP
+motion presets used to research this direction. It's available to future
+Claude Code sessions working on this repo — see its `SKILL.md` for usage.
 
 ## Before you launch (placeholder content to replace)
 

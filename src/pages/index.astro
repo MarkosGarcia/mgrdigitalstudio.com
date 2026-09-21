@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
 import ContactForm from '../components/ContactForm.astro';
 
 const services = [
@@ -43,35 +44,22 @@ const testimonials = [
   title="MGR Digital Studio | Web Design, Landing Pages & SEO in Ottawa, Ontario"
   description="MGR Digital Studio designs conversion-focused websites, landing pages, and digital marketing for small businesses in Ottawa, across Ontario, and Canada-wide."
 >
-  <section class="hero">
-    <div class="container">
-      <div>
-        <span class="eyebrow" style="color: #8b8ffb;">Web Design & Digital Marketing — Ottawa, Ontario</span>
-        <h1>Websites built to convert</h1>
-        <p class="lead">
-          We design and build fast, mobile-friendly websites, landing pages, and small
-          business websites — engineered to turn visitors into leads and customers,
-          not just page views. Based in Ottawa, serving businesses across Ontario and Canada.
-        </p>
-        <div class="hero-badges">
-          <span>Mobile-first builds</span>
-          <span>SEO-ready from day one</span>
-          <span>Launch in 2–4 weeks</span>
-          <span>Fixed-price quotes</span>
-        </div>
-      </div>
-
-      <ContactForm compact={true} heading="Get your free site plan" />
-    </div>
-  </section>
+  <Hero
+    headline="Websites built to"
+    emphasis="convert."
+    lead="We design and build fast, mobile-friendly websites, landing pages, and small business websites for founders in Ottawa, across Ontario, and Canada-wide."
+    primaryCta={{ label: 'Start your project', href: '#start' }}
+    secondaryCta={{ label: 'See our work', href: '/portfolio' }}
+    note="Fixed-price quotes · Launch in 2–4 weeks"
+  />
 
   <section class="section">
     <div class="container">
-      <div class="center" style="max-width: 640px; margin: 0 auto 48px;">
+      <div class="center" style="max-width: 640px; margin: 0 auto 56px;" data-reveal>
         <span class="eyebrow">What we do</span>
         <h2>Everything your website needs to earn its keep</h2>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3" data-reveal-group>
         {services.map((service) => (
           <div class="card">
             <h3>{service.title}</h3>
@@ -84,11 +72,11 @@ const testimonials = [
 
   <section class="section section-alt">
     <div class="container">
-      <div class="center" style="max-width: 640px; margin: 0 auto 48px;">
+      <div class="center" style="max-width: 640px; margin: 0 auto 56px;" data-reveal>
         <span class="eyebrow">Recent work</span>
         <h2>A few projects we've shipped</h2>
       </div>
-      <div class="grid grid-3">
+      <div class="grid grid-3" data-reveal-group>
         <a href="/portfolio" class="card" style="text-decoration:none;">
           <div class="thumb">Project One</div>
           <h3>Service Business Rebrand</h3>
@@ -110,11 +98,11 @@ const testimonials = [
 
   <section class="section">
     <div class="container">
-      <div class="center" style="max-width: 640px; margin: 0 auto 48px;">
+      <div class="center" style="max-width: 640px; margin: 0 auto 56px;" data-reveal>
         <span class="eyebrow">What clients say</span>
         <h2>Trusted by small businesses and founders</h2>
       </div>
-      <div class="grid grid-2">
+      <div class="grid grid-2" data-reveal-group>
         {testimonials.map((t) => (
           <div class="testimonial">
             <p>&ldquo;{t.quote}&rdquo;</p>
@@ -136,7 +124,7 @@ const testimonials = [
   </section>
 
   <section class="section section-alt">
-    <div class="container center" style="max-width: 720px; margin: 0 auto;">
+    <div class="container center" style="max-width: 720px; margin: 0 auto;" data-reveal>
       <span class="eyebrow">Where we work</span>
       <h2>Proudly based in Ottawa, serving all of Ontario and Canada</h2>
       <p>
@@ -147,12 +135,19 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="start">
     <div class="container">
-      <div class="cta-band">
-        <h2>Ready to build a website that actually converts?</h2>
-        <p>Tell us about your project — it takes two minutes, and there's no obligation.</p>
-        <a href="/contact" class="btn btn-primary">Start your free quote</a>
+      <div class="grid grid-2 grid-plain" style="align-items: center; gap: 56px;" data-reveal>
+        <div>
+          <span class="eyebrow">Start a project</span>
+          <h2>Ready to build a website that actually converts?</h2>
+          <p>
+            Tell us about your project — it takes two minutes, and there's no
+            obligation. We reply personally within one business day with a
+            fixed-price quote.
+          </p>
+        </div>
+        <ContactForm heading="Get your free site plan" />
       </div>
     </div>
   </section>

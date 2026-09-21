@@ -27,7 +27,7 @@ const values = [
 >
   <section class="section">
     <div class="container">
-      <div style="max-width: 720px;">
+      <div style="max-width: 720px;" data-reveal>
         <span class="eyebrow">About</span>
         <h1>A small studio, built around one goal</h1>
         <p>
@@ -47,11 +47,11 @@ const values = [
 
   <section class="section section-alt">
     <div class="container">
-      <div class="center" style="max-width: 640px; margin: 0 auto 48px;">
+      <div class="center" style="max-width: 640px; margin: 0 auto 48px;" data-reveal>
         <span class="eyebrow">How we work</span>
         <h2>What guides every project</h2>
       </div>
-      <div class="grid grid-2">
+      <div class="grid grid-2" data-reveal-group>
         {values.map((value) => (
           <div class="card">
             <h3>{value.title}</h3>
@@ -64,10 +64,10 @@ const values = [
 
   <section class="section">
     <div class="container">
-      <div class="cta-band">
+      <div class="cta-band" data-reveal>
         <h2>Want to work together?</h2>
         <p>Tell us a bit about your project and timeline — we'll get back to you within a business day.</p>
-        <a href="/contact" class="btn btn-primary">Get in touch</a>
+        <a href="/contact" class="btn btn-primary magnetic">Get in touch</a>
       </div>
     </div>
   </section>
