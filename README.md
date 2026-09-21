@@ -53,15 +53,25 @@ need here — Cloudflare Pages only needs read access to build from it.
 
 ### 2. Connect Cloudflare Pages
 
-1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-2. Authorize Cloudflare's GitHub App and select this repository.
+1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create** → **Pages** (or **Connect to Git** if that's the flow you're shown) → select this repository.
+2. Authorize Cloudflare's GitHub App if asked.
 3. Build settings:
    - **Framework preset:** Astro
    - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
+   - **Deploy command:** `npx wrangler pages deploy dist --project-name=mgrdigitalstudio-com`
+     (some Cloudflare flows show this as a "Workers" style Git integration with
+     separate Build/Deploy command fields rather than a single "Build output
+     directory" field — if you only see "Build output directory", set it to
+     `dist` and you can skip the deploy command entirely)
 4. Click **Save and Deploy**. Cloudflare will install dependencies, run the
    build, and deploy `dist/` plus the `functions/` directory automatically —
    no extra config needed for the contact-form function.
+
+`wrangler.toml` in this repo (`name = "mgrdigitalstudio-com"`,
+`pages_build_output_dir = "dist"`) pins the project name so `wrangler pages
+deploy` always knows where to upload, even without the `--project-name` flag —
+match `name` in `wrangler.toml` to whatever you actually named the project in
+the dashboard if it differs from `mgrdigitalstudio-com`.
 
 Every push to your production branch (usually `main`) triggers a new deploy
 automatically. Pull requests / other branches get their own preview URLs.
