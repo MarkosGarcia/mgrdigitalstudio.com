@@ -1,0 +1,20 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# environment variables
+.env
+.env.production
+
+# logs
+npm-debug.log*
+
+# python bytecode (from ui-ux-pro-max skill scripts)
+__pycache__/
+*.pyc
+
+# editor/OS
+.DS_Store

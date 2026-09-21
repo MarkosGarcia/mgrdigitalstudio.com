@@ -1,0 +1,78 @@
+---
+interface Props {
+  kicker?: string;
+  headline: string;
+  emphasis?: string;
+  lead: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  note?: string;
+}
+
+const {
+  kicker = 'Web Design & Digital Marketing — Ottawa, Ontario',
+  headline,
+  emphasis,
+  lead,
+  primaryCta,
+  secondaryCta,
+  note,
+} = Astro.props;
+---
+
+<section class="hero" id="hero">
+  <div class="hero-scene" aria-hidden="true">
+    <div class="hero-glow hero-glow--one" data-parallax="0.12"></div>
+    <div class="hero-glow hero-glow--two" data-parallax="-0.08"></div>
+    <div class="hero-scanline" data-parallax="0.04"></div>
+    <div class="hero-vignette"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-kicker" data-hero-item>{kicker}</span>
+      <h1 data-hero-headline>
+        {headline}{emphasis ? <> <em>{emphasis}</em></> : null}
+      </h1>
+      <p class="lead" data-hero-item>{lead}</p>
+      <div class="hero-actions" data-hero-item>
+        <a href={primaryCta.href} class="btn btn-primary magnetic">{primaryCta.label}</a>
+        {secondaryCta && (
+          <a href={secondaryCta.href} class="btn btn-outline magnetic">{secondaryCta.label}</a>
+        )}
+      </div>
+      {note && <p class="hero-note" data-hero-item>{note}</p>}
+    </div>
+  </div>
+
+  <div class="scroll-cue" data-hero-item>Scroll</div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.getElementById('hero');
+  if (hero && !reduceMotion) {
+    const headline = hero.querySelector('[data-hero-headline]');
+    const items = hero.querySelectorAll('[data-hero-item]');
+
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+    if (headline) {
+      tl.from(headline, { opacity: 0, y: 28, duration: 0.9 }, 0.1);
+    }
+    tl.from(items, { opacity: 0, y: 16, duration: 0.7, stagger: 0.08 }, 0.35);
+
+    // Ambient parallax on the glow/scanline layers, tied to scroll position.
+    const layers = hero.querySelectorAll<HTMLElement>('[data-parallax]');
+    const onScroll = () => {
+      const y = window.scrollY;
+      layers.forEach((layer) => {
+        const speed = parseFloat(layer.dataset.parallax || '0');
+        layer.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

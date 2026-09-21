@@ -1,0 +1,133 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'MGR Digital Studio designs conversion-focused websites, landing pages, and digital marketing for small businesses in Ottawa, Ontario, and across Canada.',
+} = Astro.props;
+
+const pageTitle = title.includes('MGR Digital Studio') ? title : `${title} · MGR Digital Studio`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'MGR Digital Studio',
+  url: 'https://mgrdigitalstudio.com',
+  description:
+    'Web design, landing page design, SEO, and digital marketing for small businesses in Ottawa, Ontario, and across Canada.',
+  areaServed: [
+    { '@type': 'City', name: 'Ottawa' },
+    { '@type': 'AdministrativeArea', name: 'Ontario' },
+    { '@type': 'Country', name: 'Canada' },
+  ],
+  knowsAbout: [
+    'Web Design',
+    'Website Design',
+    'Landing Page Design',
+    'Small Business Websites',
+    'Conversion-Focused Websites',
+    'SEO',
+    'Digital Marketing',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!reduceMotion) {
+        // Slide-up reveal for any standalone element flagged with data-reveal.
+        // Deliberately animates only `y`, never opacity: content below the fold
+        // must never render as invisible-by-default for no-scroll clients and
+        // crawlers (see ui-ux-pro-max `ux` guidance on scroll-triggered content).
+        document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+          gsap.from(el, {
+            y: 24,
+            duration: 0.6,
+            ease: 'power1.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+        });
+
+        // Staggered reveal for card/testimonial grids wrapped in data-reveal-group.
+        document.querySelectorAll<HTMLElement>('[data-reveal-group]').forEach((group) => {
+          const items = group.children;
+          if (!items.length) return;
+          gsap.from(items, {
+            y: 24,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: 'power1.out',
+            scrollTrigger: {
+              trigger: group,
+              start: 'top 88%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+        });
+
+        // Subtle magnetic pull on primary/outline buttons — pointer devices only.
+        if (window.matchMedia('(hover: hover)').matches) {
+          document.querySelectorAll<HTMLElement>('.magnetic').forEach((el) => {
+            const strength = 14;
+            el.addEventListener('mousemove', (e) => {
+              const rect = el.getBoundingClientRect();
+              const x = e.clientX - rect.left - rect.width / 2;
+              const y = e.clientY - rect.top - rect.height / 2;
+              gsap.to(el, {
+                x: (x / rect.width) * strength,
+                y: (y / rect.height) * strength,
+                duration: 0.3,
+                ease: 'power2.out',
+              });
+            });
+            el.addEventListener('mouseleave', () => {
+              gsap.to(el, { x: 0, y: 0, duration: 0.4, ease: 'elastic.out(1, 0.4)' });
+            });
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

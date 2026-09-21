@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Layout title="Blog" description="Notes on web design, development, and conversion optimization from MGR Digital Studio.">
+  <section class="section">
+    <div class="container">
+      <div class="center" style="max-width: 640px; margin: 0 auto 48px;" data-reveal>
+        <span class="eyebrow">Blog</span>
+        <h1>Notes on web design & conversion</h1>
+        <p>Short, practical write-ups — no fluff.</p>
+      </div>
+
+      <div class="stack" style="max-width: 720px; margin: 0 auto;" data-reveal-group>
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}/`} class="card post-card" style="text-decoration: none; display: block;">
+            <p class="post-meta">{dateFormatter.format(post.data.pubDate)}</p>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const values = [
+  {
+    title: 'Clarity over cleverness',
+    text: "We'd rather ship a page that clearly states what you offer than one that wins design awards but confuses visitors.",
+  },
+  {
+    title: 'Built for mobile first',
+    text: 'Most of your visitors are on a phone. We design and test there first, not as an afterthought.',
+  },
+  {
+    title: 'Fixed prices, no surprises',
+    text: "You'll know the full cost before work starts. No hourly billing creep.",
+  },
+  {
+    title: 'We keep it simple',
+    text: 'Sites we hand off are easy to update yourself — you are never locked into needing us for a text change.',
+  },
+];
+---
+
+<Layout
+  title="About MGR Digital Studio"
+  description="MGR Digital Studio is a web design and digital marketing studio based in Ottawa, Ontario, serving small businesses across Canada."
+>
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 720px;" data-reveal>
+        <span class="eyebrow">About</span>
+        <h1>A small studio, built around one goal</h1>
+        <p>
+          MGR Digital Studio is a web design and digital marketing studio based
+          in Ottawa, Ontario, designing and building websites for small
+          businesses and founders across Canada who need a site that actually
+          brings in inquiries — not just one that looks nice sitting on a domain.
+        </p>
+        <p>
+          We keep every project focused: a clear plan, a fixed price, and a
+          website that's fast, mobile-friendly, and easy for you to maintain
+          after launch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="center" style="max-width: 640px; margin: 0 auto 48px;" data-reveal>
+        <span class="eyebrow">How we work</span>
+        <h2>What guides every project</h2>
+      </div>
+      <div class="grid grid-2" data-reveal-group>
+        {values.map((value) => (
+          <div class="card">
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band" data-reveal>
+        <h2>Want to work together?</h2>
+        <p>Tell us a bit about your project and timeline — we'll get back to you within a business day.</p>
+        <a href="/contact" class="btn btn-primary magnetic">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</Layout>

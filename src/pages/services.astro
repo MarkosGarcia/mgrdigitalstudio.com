@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    title: 'Web Design & Website Design',
+    text: "A custom-designed, hand-coded small business website — not a generic template. Built for speed, accessibility, and easy editing, on modern tools instead of bloated page builders.",
+    items: ['Custom design in your brand', 'Fast, mobile-first build', 'CMS or content collection for easy edits', 'Analytics set up from day one'],
+  },
+  {
+    title: 'Landing Page Design',
+    text: 'A dedicated, conversion-focused website for a campaign, ad, or launch — structured around a single goal instead of trying to say everything at once.',
+    items: ['Clear, benefit-driven headline', 'Contact or sign-up form above the fold', 'Mobile-tested forms and buttons', 'Built-in social proof section'],
+  },
+  {
+    title: 'SEO',
+    text: "On-page and technical SEO so your website is actually findable — for local searches like \"Ottawa web design\" and beyond.",
+    items: ['Keyword-mapped page titles & headings', 'Local SEO for Ottawa & Ontario', 'Core Web Vitals & site speed', 'Structured data (schema markup)'],
+  },
+  {
+    title: 'Digital Marketing',
+    text: 'Ongoing content, email, and campaign support to keep bringing the right visitors back to your site.',
+    items: ['Blog & content writing', 'Email campaigns', 'Ongoing edits & maintenance', 'Monthly reporting'],
+  },
+  {
+    title: 'Branding & UI Design',
+    text: 'A simple, consistent visual identity — logo mark, colors, type, and a small component system — so every page and email looks like the same business.',
+    items: ['Logo and color palette', 'Typography system', 'Reusable UI components', 'Brand style sheet'],
+  },
+];
+---
+
+<Layout
+  title="Web Design, Landing Pages, SEO & Digital Marketing Services"
+  description="Web design, website design, landing page design, SEO, and digital marketing services for small businesses in Ottawa, Ontario, and across Canada."
+>
+  <section class="section">
+    <div class="container">
+      <div class="center" style="max-width: 680px; margin: 0 auto 56px;" data-reveal>
+        <span class="eyebrow">Services</span>
+        <h1>Everything you need to launch and grow online</h1>
+        <p>Pick a single project or an ongoing package — every engagement starts with a fixed-price quote, no surprises.</p>
+      </div>
+
+      <div class="stack" data-reveal-group>
+        {services.map((service) => (
+          <div class="card">
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+            <div>
+              {service.items.map((item) => (
+                <span class="tag">{item}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="cta-band" data-reveal>
+        <h2>Not sure which service fits your project?</h2>
+        <p>Send us a few details and we'll recommend the right starting point — for free.</p>
+        <a href="/contact" class="btn btn-primary magnetic">Get a free recommendation</a>
+      </div>
+    </div>
+  </section>
+</Layout>
