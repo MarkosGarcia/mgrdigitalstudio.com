@@ -204,6 +204,9 @@ main > .section:first-child {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.2rem;
@@ -214,6 +217,19 @@ main > .section:first-child {
 
 .logo span {
   color: var(--color-accent);
+}
+
+.logo-mark {
+  height: 34px;
+  width: auto;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 420px) {
+  .logo-text {
+    display: none;
+  }
 }
 
 .nav {
@@ -674,12 +690,18 @@ main > .section:first-child {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.4fr 0.8fr 1fr 1fr;
   gap: 40px;
   margin-bottom: 40px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 860px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -788,4 +810,116 @@ main > .section:first-child {
 
 .magnetic {
   display: inline-flex;
+}
+
+/* Floating WhatsApp + assistance widgets */
+.fw-stack {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.fw-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fw-btn:hover {
+  transform: translateY(-2px);
+}
+
+.fw-btn svg {
+  width: 26px;
+  height: 26px;
+}
+
+.fw-btn--help {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.fw-btn--whatsapp {
+  background: #25d366;
+  color: #ffffff;
+}
+
+.fw-panel {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 2px;
+  padding: 14px;
+  width: 220px;
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.6);
+}
+
+.fw-panel.is-open {
+  display: flex;
+}
+
+.fw-panel-title {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 6px;
+}
+
+.fw-panel-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--color-text);
+  transition: background 0.15s ease;
+}
+
+.fw-panel-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.fw-panel-link:hover {
+  background: var(--color-surface-2);
+}
+
+.fw-panel-link--accent {
+  border-top: 1px solid var(--color-border);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .fw-stack {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .fw-btn {
+    width: 50px;
+    height: 50px;
+  }
 }

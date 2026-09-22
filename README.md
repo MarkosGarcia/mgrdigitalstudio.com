@@ -85,8 +85,8 @@ send mail too):
 | Variable             | Example value                                  |
 |----------------------|-------------------------------------------------|
 | `RESEND_API_KEY`     | `re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx`                |
-| `CONTACT_TO_EMAIL`   | `hello@mgrdigitalstudio.com`                     |
-| `CONTACT_FROM_EMAIL` | `MGR Digital Studio <contact@mgrdigitalstudio.com>` |
+| `CONTACT_TO_EMAIL`   | `info@mgrdigitalstudio.com`                     |
+| `CONTACT_FROM_EMAIL` | `MGR Digital Studio <info@mgrdigitalstudio.com>` |
 
 To get `RESEND_API_KEY`:
 
@@ -152,9 +152,10 @@ should be updated with real content before it goes live for clients:
       swap in real case studies, screenshots instead of gradient placeholders.
 - [ ] Calendly link on the thank-you page (`src/pages/thank-you.astro`) —
       point to a real scheduling link or remove the button.
-- [ ] Contact email address (`hello@mgrdigitalstudio.com`) throughout —
-      confirm this is the address you want public, and that it's verified
-      in Resend as the `CONTACT_FROM_EMAIL` sending domain.
+- [x] Contact email (`info@mgrdigitalstudio.com`), phone/WhatsApp
+      (`+1 613-513-7243`), and address (702 Maloja Way, Stittsville,
+      Ottawa, ON K2S 0N6) are real — confirm `info@mgrdigitalstudio.com`
+      is verified in Resend as the `CONTACT_FROM_EMAIL` sending domain.
 - [ ] `About` page copy — personalize with real studio background.
 - [ ] Favicon (`public/favicon.svg`) — currently a simple "M" placeholder.
 

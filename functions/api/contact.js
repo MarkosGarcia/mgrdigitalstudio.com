@@ -2,8 +2,8 @@
 //
 // Required environment variables (set in Cloudflare Pages > Settings > Environment variables):
 //   RESEND_API_KEY    - API key from https://resend.com (free tier is enough for a small studio)
-//   CONTACT_TO_EMAIL  - where inquiries should be delivered, e.g. hello@mgrdigitalstudio.com
-//   CONTACT_FROM_EMAIL - verified sender, e.g. "MGR Digital Studio <contact@mgrdigitalstudio.com>"
+//   CONTACT_TO_EMAIL  - where inquiries should be delivered, e.g. info@mgrdigitalstudio.com
+//   CONTACT_FROM_EMAIL - verified sender, e.g. "MGR Digital Studio <info@mgrdigitalstudio.com>"
 //                         (must be on a domain verified in Resend; falls back to a Resend
 //                         sandbox address if not set, which only works for testing)
 
@@ -59,7 +59,7 @@ export async function onRequestPost(context) {
     return redirectTo(`${fallbackPage}?error=config`, request);
   }
 
-  const toEmail = env.CONTACT_TO_EMAIL || 'hello@mgrdigitalstudio.com';
+  const toEmail = env.CONTACT_TO_EMAIL || 'info@mgrdigitalstudio.com';
   const fromEmail = env.CONTACT_FROM_EMAIL || 'MGR Digital Studio <onboarding@resend.dev>';
 
   try {

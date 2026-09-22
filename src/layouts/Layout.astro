@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FloatingWidgets from '../components/FloatingWidgets.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -15,14 +16,28 @@ const {
 
 const pageTitle = title.includes('MGR Digital Studio') ? title : `${title} · MGR Digital Studio`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/og-image.jpg', Astro.site);
+const logoURL = new URL('/logo-icon.jpg', Astro.site);
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'MGR Digital Studio',
   url: 'https://mgrdigitalstudio.com',
+  logo: logoURL.toString(),
+  image: ogImageURL.toString(),
   description:
     'Web design, landing page design, SEO, and digital marketing for small businesses in Ottawa, Ontario, and across Canada.',
+  telephone: '+1-613-513-7243',
+  email: 'info@mgrdigitalstudio.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '702 Maloja Way, Stittsville',
+    addressLocality: 'Ottawa',
+    addressRegion: 'ON',
+    postalCode: 'K2S 0N6',
+    addressCountry: 'CA',
+  },
   areaServed: [
     { '@type': 'City', name: 'Ottawa' },
     { '@type': 'AdministrativeArea', name: 'Ontario' },
@@ -54,7 +69,9 @@ const structuredData = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageURL} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
@@ -63,6 +80,7 @@ const structuredData = {
       <slot />
     </main>
     <Footer />
+    <FloatingWidgets />
 
     <script>
       import { gsap } from 'gsap';

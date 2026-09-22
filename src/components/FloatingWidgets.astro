@@ -1,0 +1,93 @@
+---
+const whatsappHref = 'https://wa.me/16135137243';
+const phoneHref = 'tel:+16135137243';
+const emailHref = 'mailto:info@mgrdigitalstudio.com';
+---
+
+<div class="fw-stack">
+  <div class="fw-panel" id="fw-panel" role="menu" aria-hidden="true">
+    <p class="fw-panel-title">Need a hand?</p>
+    <a href={phoneHref} class="fw-panel-link" role="menuitem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M4 5c0 8.284 6.716 15 15 15l2-4-5-2-2 2c-2.5-1-4.5-3-5.5-5.5l2-2-2-5-4 1.5Z" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Call us
+    </a>
+    <a href={whatsappHref} class="fw-panel-link" target="_blank" rel="noopener" role="menuitem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M12 21a9 9 0 1 0-7.8-4.5L3 21l4.7-1.2A9 9 0 0 0 12 21Z" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 9.5c0 3.5 2.5 6 6 6 .8 0 1-1.5.5-2s-1.5-1-2-.5-.5.5-1 .2-1.7-1.2-2-1.7-.3-.5.2-1-.5-2.2-1-2.2-1.5.7-1.5 1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      WhatsApp us
+    </a>
+    <a href={emailHref} class="fw-panel-link" role="menuitem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M4 6h16v12H4z" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Email us
+    </a>
+    <a href="/contact" class="fw-panel-link fw-panel-link--accent" role="menuitem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Send a message
+    </a>
+  </div>
+
+  <button
+    type="button"
+    class="fw-btn fw-btn--help"
+    id="fw-toggle"
+    aria-label="Need help? Open contact options"
+    aria-expanded="false"
+    aria-controls="fw-panel"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9.5 9a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 1.9-2.4 3.7" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M12 17h.01" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <a
+    href={whatsappHref}
+    class="fw-btn fw-btn--whatsapp"
+    target="_blank"
+    rel="noopener"
+    aria-label="Message us on WhatsApp"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M12 21a9 9 0 1 0-7.8-4.5L3 21l4.7-1.2A9 9 0 0 0 12 21Z" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M8.5 9.5c0 3.5 2.5 6 6 6 .8 0 1-1.5.5-2s-1.5-1-2-.5-.5.5-1 .2-1.7-1.2-2-1.7-.3-.5.2-1-.5-2.2-1-2.2-1.5.7-1.5 1.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </a>
+</div>
+
+<script>
+  const toggle = document.getElementById('fw-toggle');
+  const panel = document.getElementById('fw-panel');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = panel?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+    panel?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!panel?.classList.contains('is-open')) return;
+    const target = e.target as Node;
+    if (panel.contains(target) || toggle?.contains(target)) return;
+    panel.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    toggle?.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel?.classList.contains('is-open')) {
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      toggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
