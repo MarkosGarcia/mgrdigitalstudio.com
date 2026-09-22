@@ -20,14 +20,17 @@ export const HeroSignature: React.FC<{ className?: string }> = ({
     </div>
 
     <div className="group relative rounded-[2rem] border border-hair glass glass-hero backdrop-blur-xl p-10 md:p-14">
-      <Image
-        src="/logo-full.png"
-        alt="MGR Digital Studio — Websites, Landing Pages, SEO, Google Business Profile Optimization, Conversion Optimization, AI Search Optimization, Marketing, Marketing Automation, Analytics, Paid Advertising"
-        width={900}
-        height={505}
-        priority
-        className="w-full h-auto object-contain drop-shadow-[0_8px_28px_rgba(138,100,16,0.18)] transition-transform duration-500 ease-out float-slow group-hover:-translate-y-1 group-hover:scale-[1.03]"
-      />
+      <div className="relative">
+        <Image
+          src="/logo-full.png"
+          alt="MGR Digital Studio — Websites, Landing Pages, SEO, Google Business Profile Optimization, Conversion Optimization, AI Search Optimization, Marketing, Marketing Automation, Analytics, Paid Advertising"
+          width={900}
+          height={505}
+          priority
+          className="w-full h-auto object-contain drop-shadow-[0_8px_28px_rgba(138,100,16,0.18)] transition-transform duration-500 ease-out float-slow group-hover:-translate-y-1 group-hover:scale-[1.03]"
+        />
+        <span className="logo-sheen-full" />
+      </div>
     </div>
   </div>
 );
