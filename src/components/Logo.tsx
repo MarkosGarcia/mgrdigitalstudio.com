@@ -29,7 +29,7 @@ export const LogoMark: React.FC<{ className?: string; animated?: boolean }> = ({
 // to it — see the capabilities list on the Services page instead). Replaces
 // the earlier icon-image + live-CSS-wordmark pairing.
 export const Logo: React.FC<{ className?: string }> = ({
-  className = "h-9 w-auto",
+  className = "h-20 w-auto",
 }) => (
   <span className={`inline-block ${className}`}>
     <Image
