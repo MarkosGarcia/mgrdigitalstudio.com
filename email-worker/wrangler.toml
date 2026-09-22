@@ -1,0 +1,10 @@
+name = "mgrdigitalstudio-email-notifier"
+main = "src/index.ts"
+compatibility_date = "2026-08-30"
+
+# NOTIFY_SECRET is a secret, not set here — provisioned via:
+#   wrangler secret put NOTIFY_SECRET
+# (run from inside this email-worker/ directory)
+
+[[send_email]]
+name = "SEND_EMAIL"

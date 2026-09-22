@@ -1,188 +1,210 @@
 # MGR Digital Studio — mgrdigitalstudio.com
 
-Source for the MGR Digital Studio marketing site: Home, Services, Portfolio,
-About, Contact, and a Blog, built with [Astro](https://astro.build) and
-deployed as a static site with a small serverless contact-form endpoint.
+Source for the MGR Digital Studio marketing site — a full lead-generation
+site (not just a brochure): homepage, services, portfolio, an interactive
+quote calculator, a self-serve booking calendar, a lead-assessment modal, an
+admin CRM dashboard, an English/Spanish split, and a blog.
+
+MGR Digital Studio is the trading name of S&G Marketing — the same
+one-person Ottawa web design business previously run as "Websites
+Converting" (websitesconverting.ca). This repo was migrated wholesale from
+that project's Next.js codebase and rebranded; the old project and its data
+are untouched.
 
 ## Stack
 
-- **Astro** (static output) — fast, minimal-JS pages
-- **GSAP + ScrollTrigger** — the site's motion system (hero entrance, scroll reveals, parallax, magnetic buttons)
-- **Cloudflare Pages** — hosting (free, unlimited bandwidth, commercial use allowed)
-- **Cloudflare Pages Functions** (`functions/api/contact.js`) — handles the
-  contact form server-side
-- **[Resend](https://resend.com)** — sends the contact form email (free tier:
-  3,000 emails/month)
-- **GitHub** (private repo, free plan) — source control + auto-deploy trigger
-
-This combo costs **$0/month** at small-business traffic levels and scales to
-a paid Cloudflare/Resend plan later without changing the architecture.
+- **Next.js 16 (App Router, static export — `output: "export"`)** — the
+  whole frontend renders to static HTML/CSS/JS at build time, so it deploys
+  exactly like a plain static site (no server runtime needed).
+- **Tailwind CSS 4** — the "light glass" design system: a near-white paper
+  background, drifting soft gradient fields, metallic-gold accents.
+- **GSAP** + a small custom `Reveal`/`ParallaxBackground` system — scroll
+  motion. `Reveal` only ever animates `transform`, never `opacity`, so
+  content is never invisible-by-default for no-JS clients or crawlers.
+- **Cloudflare Pages** — hosting the static export (free, unlimited
+  bandwidth, commercial use allowed).
+- **Cloudflare Pages Functions** (`functions/api/*`) — the backend: leads,
+  bookings, availability, all backed by **Cloudflare D1** (`mgrdigitalstudio-leads`,
+  a fresh database created for this project — the old business's
+  `websitesconverting-leads` database was left alone).
+- **A standalone Cloudflare Worker** (`email-worker/`) — Pages doesn't
+  support the `send_email` binding, so lead/booking notifications go
+  through this small Worker over HTTP instead.
+- **Stripe Payment Links** (`src/lib/payments.ts`) — no backend keys, no
+  card data touching this repo; each link is created in the Stripe
+  dashboard and pasted in. All currently empty (hidden) until you set them.
+- **GitHub** (private repo) — source control + Cloudflare's auto-deploy
+  trigger on push to `main`.
 
 ## Local development
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
-npm run build     # outputs to dist/
-npm run preview   # serve the production build locally
+npm run dev       # http://localhost:3000
+npm run build     # static export to out/
+npx serve out     # serve the production build locally
 ```
 
-The contact form posts to `/api/contact`, which is a Cloudflare Pages
-Function. Pages Functions **do not run** under `astro dev`/`astro preview`
-directly — to test the function locally you need the Wrangler CLI:
+`functions/` (Cloudflare Pages Functions) does **not** run under `next dev`
+or a plain static server — to test leads/bookings/admin locally you need
+Wrangler:
 
 ```bash
 npm install -g wrangler
 npm run build
-npx wrangler pages dev dist
+npx wrangler pages dev out
 ```
 
 ## Deploying: GitHub + Cloudflare Pages
 
-### 1. Push this repo to GitHub (private)
+The Cloudflare Pages project (`mgrdigitalstudio-com`) and the
+`mgrdigitalstudio.com` custom domain already exist from the previous
+(Astro) version of this site and don't need to be recreated — but the
+**build settings need updating** for the new framework:
 
-If you haven't already:
+1. Cloudflare dashboard → **Workers & Pages** → the `mgrdigitalstudio-com`
+   project → **Settings** → **Builds**.
+2. Update:
+   - **Framework preset:** Next.js (Static HTML Export) — or "None"
+   - **Build command:** `npm run build`
+   - **Build output directory:** `out` (it was `dist` for the old Astro
+     build — this is the one setting that must change)
+3. Push to `main` and confirm the next deploy succeeds with the new output
+   directory.
 
-```bash
-git remote -v          # confirm the GitHub remote
-git push -u origin main
+`wrangler.toml` (`name = "mgrdigitalstudio-com"`, `pages_build_output_dir =
+"out"`) pins the project name and output dir for `wrangler pages deploy` —
+keep `name` matching the dashboard project name if it ever differs.
+
+### D1 database
+
+A fresh D1 database, `mgrdigitalstudio-leads`, was created and
+`schema.sql` applied to it already (leads, bookings, availability tables
+all exist). It's wired up in `wrangler.toml`:
+
+```toml
+[[d1_databases]]
+binding = "DB"
+database_name = "mgrdigitalstudio-leads"
+database_id = "91535f91-b2e0-4a82-92fb-ddfbde3cd17b"
 ```
 
-GitHub's Free plan includes unlimited private repositories, which is all you
-need here — Cloudflare Pages only needs read access to build from it.
+No action needed unless you want to inspect/query it yourself:
 
-### 2. Connect Cloudflare Pages
+```bash
+npx wrangler d1 execute mgrdigitalstudio-leads --remote --command="select * from leads"
+```
 
-1. Go to the [Cloudflare dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create** → **Pages** (or **Connect to Git** if that's the flow you're shown) → select this repository.
-2. Authorize Cloudflare's GitHub App if asked.
-3. Build settings:
-   - **Framework preset:** Astro
-   - **Build command:** `npm run build`
-   - **Deploy command:** `npx wrangler pages deploy dist --project-name=mgrdigitalstudio-com`
-     (some Cloudflare flows show this as a "Workers" style Git integration with
-     separate Build/Deploy command fields rather than a single "Build output
-     directory" field — if you only see "Build output directory", set it to
-     `dist` and you can skip the deploy command entirely)
-4. Click **Save and Deploy**. Cloudflare will install dependencies, run the
-   build, and deploy `dist/` plus the `functions/` directory automatically —
-   no extra config needed for the contact-form function.
+### Secrets to provision (not yet set — these are per-project secrets, never committed)
 
-`wrangler.toml` in this repo (`name = "mgrdigitalstudio-com"`,
-`pages_build_output_dir = "dist"`) pins the project name so `wrangler pages
-deploy` always knows where to upload, even without the `--project-name` flag —
-match `name` in `wrangler.toml` to whatever you actually named the project in
-the dashboard if it differs from `mgrdigitalstudio-com`.
+In the Pages project → **Settings** → **Environment variables** (as
+**Secrets**, not plain variables):
 
-Every push to your production branch (usually `main`) triggers a new deploy
-automatically. Pull requests / other branches get their own preview URLs.
+| Secret                | Purpose                                                          |
+|------------------------|-------------------------------------------------------------------|
+| `ADMIN_PASSWORD`       | Basic-auth password for `/admin` (the leads/bookings dashboard)  |
+| `EMAIL_WORKER_URL`     | URL of the deployed `email-worker` (below)                       |
+| `EMAIL_WORKER_SECRET`  | Shared secret the Pages Functions send to the worker             |
 
-### 3. Set environment variables (for the contact form to send email)
+```bash
+npx wrangler pages secret put ADMIN_PASSWORD --project-name=mgrdigitalstudio-com
+npx wrangler pages secret put EMAIL_WORKER_URL --project-name=mgrdigitalstudio-com
+npx wrangler pages secret put EMAIL_WORKER_SECRET --project-name=mgrdigitalstudio-com
+```
 
-In the Cloudflare Pages project → **Settings** → **Environment variables**,
-add for the **Production** environment (and Preview, if you want previews to
-send mail too):
+### Deploy the email-worker (separate from the Pages project)
 
-| Variable             | Example value                                  |
-|----------------------|-------------------------------------------------|
-| `RESEND_API_KEY`     | `re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx`                |
-| `CONTACT_TO_EMAIL`   | `info@mgrdigitalstudio.com`                     |
-| `CONTACT_FROM_EMAIL` | `MGR Digital Studio <info@mgrdigitalstudio.com>` |
+This hasn't been deployed yet under the MGR Digital Studio name — it needs
+its own `wrangler deploy` from inside `email-worker/`:
 
-To get `RESEND_API_KEY`:
+```bash
+cd email-worker
+npx wrangler deploy
+npx wrangler secret put NOTIFY_SECRET   # same value as EMAIL_WORKER_SECRET above
+```
 
-1. Sign up at [resend.com](https://resend.com) (free).
-2. Under **Domains**, add and verify `mgrdigitalstudio.com` (a few DNS
-   records — easy if the domain's DNS is already on Cloudflare).
-3. Under **API Keys**, create a key and paste it in as `RESEND_API_KEY`.
+It also needs the Cloudflare **Email Routing** "Send email" binding enabled
+for `mgrdigitalstudio.com` so `info@mgrdigitalstudio.com` is allowed as a
+`from` address (Cloudflare dashboard → your domain → **Email** → **Email
+Routing**). Notifications currently send **to**
+`markos.garcia.ramirez@gmail.com` (kept as the personal inbox that's
+definitely working) — switch `TO` in `email-worker/src/index.ts` to
+`info@mgrdigitalstudio.com` once that Zoho mailbox is fully verified, if
+you'd rather they land there.
 
-Until `RESEND_API_KEY` is set, form submissions will redirect back with a
-friendly "not configured yet" message instead of failing silently.
+### Optional: Google Analytics
 
-### 4. Connect the domain
-
-In the Pages project → **Custom domains** → **Set up a custom domain**, add
-`mgrdigitalstudio.com` (and `www.mgrdigitalstudio.com` if you want both).
-
-- If the domain's nameservers already point to Cloudflare, this is instant.
-- If not, Cloudflare will walk you through changing nameservers at your
-  registrar (still free — you don't need Cloudflare as your registrar,
-  just as your DNS provider).
+`src/components/Analytics.tsx` only loads GA4 if
+`NEXT_PUBLIC_GA_MEASUREMENT_ID` is set as a **build variable** (not secret)
+in Cloudflare Pages. Unset today — add it once you've created a GA4
+property for the new brand (the old site's, if any, belongs to Websites
+Converting).
 
 ## Project structure
 
 ```
 src/
-  layouts/Layout.astro       shared <head>, header, footer, site-wide motion script
-  components/                Header, Footer, ContactForm, Hero
-  pages/                     index, services, about, portfolio, contact,
-                              thank-you, blog/index, blog/[...slug]
-  content/blog/*.md          blog posts (Astro content collections)
-  content.config.ts          blog collection schema
-  styles/global.css          design tokens + all site styles
-functions/api/contact.js     Cloudflare Pages Function: contact form handler
-public/                      favicon, robots.txt
-design-system/mgr-digital-studio/MASTER.md   the design system reference (colors,
-                              type, motion rules) — read this before changing the
-                              visual design, generated/maintained via the
-                              ui-ux-pro-max Claude Code skill in .claude/skills/
+  app/            Next.js App Router pages — every route under the site,
+                  including admin/, booking/, es/ (Spanish), quote-calculator/
+  components/     Header, Footer, Hero, BookingCalendar, QuoteCalculator,
+                  AdminDashboard, AssessmentModal, WhatsAppButton, Logo, ...
+  lib/
+    business.ts   single source of truth for brand name, phone, email,
+                  legal name, address — change contact info here, not per-page
+    content.ts    services, pricing, testimonials, FAQs, blog posts
+    payments.ts   Stripe Payment Link URLs (empty until you create them)
+    scheduling.ts booking/availability logic
+functions/api/    Cloudflare Pages Functions: leads.ts, bookings.ts,
+                  availability.ts — the D1-backed backend
+email-worker/     standalone Cloudflare Worker for outbound email
+schema.sql        D1 schema (already applied to mgrdigitalstudio-leads)
+public/
+  logo-mark.png   the gold MGR monogram, cut from the supplied artwork with
+                  real transparency (see git history for the cutout method)
+  marcos.jpg      real portrait, About page
+  llms.txt        plain-language business facts for AI crawlers/answer engines
 ```
 
-## Design system
+## Reviews / past work — a decision still open
 
-The visual direction — dark cinematic/editorial, Playfair Display + Inter,
-gold accent, hairline-grid cards, GSAP scroll motion — is documented in
-[`design-system/mgr-digital-studio/MASTER.md`](design-system/mgr-digital-studio/MASTER.md).
-Read it before making visual changes; it also explains a scroll-reveal
-pitfall (opacity-based reveals hiding below-the-fold content from
-no-JS/crawler clients) that was found and fixed, so it isn't reintroduced.
+`src/lib/content.ts` has two real, named past-client projects (with live
+site links) carried over from the Websites Converting era, both currently
+`approved: false` so neither the `/reviews` nor `/work` page shows them (a
+generic "two clients so far" fallback shows instead). The work is real and
+done by the same person, but showing a client's name under the *new* brand
+without asking them again is a judgment call — flip `approved: true` in
+`content.ts` once you're comfortable with that, or leave as-is.
 
-The `ui-ux-pro-max` skill (`.claude/skills/ui-ux-pro-max/`) is a searchable
-local database of UI styles, color palettes, typography pairings, and GSAP
-motion presets used to research this direction. It's available to future
-Claude Code sessions working on this repo — see its `SKILL.md` for usage.
+## Before you launch
 
-## Before you launch (placeholder content to replace)
+- [x] Contact info (`src/lib/business.ts`): email, phone/WhatsApp, address
+      are real.
+- [x] D1 database created and schema applied.
+- [ ] Deploy `email-worker/` under the new name and set the three Pages
+      secrets above — until then, lead/booking notification emails will
+      fail silently (the lead/booking itself still saves to D1 either way).
+- [ ] Cloudflare Pages build output directory: change `dist` → `out`.
+- [ ] Decide on the reviews/work approval question above.
+- [ ] Stripe Payment Links (`src/lib/payments.ts`) — currently empty/hidden;
+      add real links if you want in-site deposit payments.
+- [ ] Resend / Zoho email setup from the previous (Astro) version of this
+      site — domain verification and mailbox setup are independent of the
+      framework and should already be in progress; not affected by this
+      migration.
+- [ ] `NEXT_PUBLIC_GA_MEASUREMENT_ID` — add once a GA4 property exists for
+      the new brand.
 
-This is a working, deployable site, but the following are placeholders and
-should be updated with real content before it goes live for clients:
+## SEO
 
-- [ ] Client testimonials on the homepage (`src/pages/index.astro`) — either
-      replace with real, permissioned quotes or remove the section.
-- [ ] Portfolio projects (`src/pages/portfolio.astro`, homepage teaser) —
-      swap in real case studies, screenshots instead of gradient placeholders.
-- [ ] Calendly link on the thank-you page (`src/pages/thank-you.astro`) —
-      point to a real scheduling link or remove the button.
-- [x] Contact email (`info@mgrdigitalstudio.com`), phone/WhatsApp
-      (`+1 613-513-7243`), and address (702 Maloja Way, Stittsville,
-      Ottawa, ON K2S 0N6) are real — confirm `info@mgrdigitalstudio.com`
-      is verified in Resend as the `CONTACT_FROM_EMAIL` sending domain.
-- [ ] `About` page copy — personalize with real studio background.
-- [ ] Favicon (`public/favicon.svg`) — currently a simple "M" placeholder.
+Every page sets its own metadata (`src/app/**/page.tsx`), and
+`src/app/layout.tsx` injects a linked `ProfessionalService` + `Person` +
+`WebSite` JSON-LD graph with a real address, phone, email, languages, and
+booking action — `areaServed` covers Ottawa, Ontario, Canada, and the U.S.
+`public/llms.txt` gives AI answer engines the same facts in plain English.
 
-## SEO notes
+On-page SEO only goes so far for local search:
 
-The site is set up to target: web design, website design, landing page
-design, small business websites, conversion-focused websites, SEO, digital
-marketing, and Ottawa/Ontario/Canadian web design. Each page has a unique
-`<title>`/description (`src/pages/*.astro`), and `Layout.astro` injects a
-`ProfessionalService` JSON-LD schema with `areaServed` set to Ottawa,
-Ontario, and Canada.
-
-On-page keywords and schema markup only go so far for **local** search
-("Ottawa web design"). The highest-impact next steps, once you have a real
-business address/phone:
-
-- [ ] Create and verify a [Google Business Profile](https://www.google.com/business/) with a real address/phone, and add that same address/phone to the JSON-LD in `Layout.astro`.
-- [ ] Get listed in a few Ottawa/Ontario business directories (local citations) with identical name/address/phone.
-- [ ] Ask happy clients for Google reviews once you have some.
-
-None of that blocks launch — it's what turns on-page SEO into actual local
-rankings over the following weeks/months.
-
-## Contact form spam protection
-
-The form uses a hidden honeypot field (`company_website`) — bots that fill
-in every field get silently redirected without an email being sent. If spam
-becomes a problem, consider adding [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/)
-(free, unlimited, and integrates naturally since you're already on
-Cloudflare) in front of the form.
+- [ ] Create/verify a Google Business Profile with this same address/phone.
+- [ ] A few Ottawa/Ontario business directory listings with identical
+      name/address/phone.
+- [ ] Ask happy clients for Google reviews once there are some.

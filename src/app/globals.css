@@ -1,0 +1,683 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Light glass theme.
+
+   The ground is near-white paper. Colour comes from four large, soft prism
+   fields that sit behind everything on a single fixed layer, blended with
+   `multiply` — on a light ground colour has to subtract, so `screen` (which
+   the old dark theme used) would do literally nothing here. The fields drift
+   slowly on their own and shift at different rates as the page scrolls, so
+   where they overlap the hue genuinely changes rather than just sliding.
+
+   Panels are translucent white over that field. Only a few large surfaces
+   (header, modal) actually run `backdrop-filter` — the background behind a
+   card is already a soft gradient, so blurring it again per card costs real
+   frames and looks identical.
+   --------------------------------------------------------------------------- */
+:root {
+  --paper: #f7f8fb;
+  --paper-lift: rgba(255, 255, 255, 0.62);
+
+  /* Text ramp. Every value here clears WCAG AA against the paper ground:
+     ink 18:1, ink-2 13:1, ink-3 6.4:1, ink-4 4.9:1, gold 4.9:1. */
+  --ink: #0b1220;
+  --ink-2: #223047;
+  --ink-3: #4a5a72;
+  --ink-4: #5b6b82;
+
+  --hair: rgba(15, 23, 42, 0.1);
+  --hair-strong: rgba(15, 23, 42, 0.18);
+
+  /* Metallic gold stays for fills — a gold button, a gold border. But #d4a937
+     as *text* on white is about 1.9:1, so gold type gets its own deeper
+     value rather than quietly failing contrast everywhere. */
+  --accent-gold-start: #d4a937;
+  --accent-gold-end: #b8860b;
+  --accent-gold-glow: rgba(212, 169, 55, 0.28);
+  --gold-deep: #8a6410;
+
+  /* Tech accent, darkened from the dark theme's #3b82f6 / #7c3aed so the
+     gradient headline still reads against paper. */
+  --accent-tech-start: #1d4ed8;
+  --accent-tech-end: #6d28d9;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+
+  --color-hair: var(--hair);
+  --color-hair-strong: var(--hair-strong);
+
+  --color-gold: var(--gold-deep);
+  --color-accent-tech-start: var(--accent-tech-start);
+  --color-accent-tech-end: var(--accent-tech-end);
+  --color-accent-gold-start: var(--accent-gold-start);
+  --color-accent-gold-end: var(--accent-gold-end);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+
+  /* Retunes every amber-* utility used across the site (button gradients,
+     borders, tints) from Tailwind's stock orange-leaning amber to an actual
+     metallic gold — one place instead of hundreds of call sites. These are
+     fill values; gold *text* uses --color-gold above. */
+  --color-amber-300: #f4e2ae;
+  --color-amber-400: #e8c468;
+  --color-amber-500: #d4a937;
+  --color-amber-600: #b8860b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink-3);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--accent-gold-start);
+  color: #0b1220;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion system. The built-in CSS easings are too weak to read as
+   intentional — these are the stronger custom curves. `ease-in` is
+   deliberately absent: it delays the initial movement, which is the exact
+   moment the eye is watching, so it reads as sluggish on UI.
+   --------------------------------------------------------------------------- */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Scroll-reveal primitive: elements start offset, then animate to place when
+   the .is-visible class is toggled on by IntersectionObserver. Deliberately
+   never animates opacity — a no-JS client, a crawler that doesn't run the
+   IntersectionObserver callback, or a screenshot taken before scroll would
+   otherwise see genuinely blank content instead of just unanimated content.
+   Translate stays small — a long travel distance reads as a page that
+   hasn't finished loading rather than as polish. */
+.reveal {
+  transform: translateY(14px);
+  transition: transform 0.55s var(--ease-out);
+  will-change: transform;
+}
+
+.reveal.is-visible {
+  transform: translateY(0);
+}
+
+/* Press feedback. Anything pressable should visibly answer the press —
+   this is most of what makes an interface feel like it's listening. */
+.pressable {
+  transition: transform 160ms var(--ease-out);
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+/* Hover lift, gated so touch devices don't fire it on tap. */
+@media (hover: hover) and (pointer: fine) {
+  .lift {
+    transition: transform 200ms var(--ease-out), border-color 200ms ease,
+      box-shadow 200ms ease, background-color 200ms ease;
+  }
+
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* A lifted glass panel should also cast further, the way a real card does
+     when you pick it up. */
+  .glass.lift:hover {
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04),
+      0 18px 44px -18px rgba(15, 23, 42, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Both classes write to `transform`, so an element that lifts AND presses
+     needs the two composed explicitly — otherwise whichever rule is
+     declared last silently wins and the press stops registering. */
+  .lift.pressable:active {
+    transform: translateY(-1px) scale(0.97);
+  }
+}
+
+/* Mobile menu items cascade in. Stagger stays short (40ms) — longer gaps
+   read as the menu being slow to open rather than as craft. */
+.menu-item {
+  opacity: 0;
+  transform: translateY(-6px);
+  animation: menu-item-in 240ms var(--ease-out) forwards;
+}
+
+@keyframes menu-item-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Underline that draws from the left on hover — cheap, and it makes plain
+   text links feel considered. Scales a pseudo-element rather than
+   animating width, so it stays on the compositor. */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Glass surfaces.
+   --------------------------------------------------------------------------- */
+
+/* Cards and panels. No backdrop-filter: what sits behind them is already a
+   soft blurred gradient, so a second blur per card is invisible and costs
+   frames on a page with thirty of them. The inset top highlight is what
+   actually sells the edge as glass. */
+.glass {
+  background: var(--paper-lift);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 10px 30px -16px rgba(15, 23, 42, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* The hero card is the one panel the eye rests on, so it sits higher off the
+   page than the rest. Still a soft, warm-neutral cast — a stock black drop
+   shadow under glass reads as a sticker. */
+.glass-hero {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04),
+    0 28px 70px -28px rgba(23, 33, 58, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Reserved for the few surfaces that genuinely sit over moving content and
+   need to blur it: the sticky header, the modal. */
+.glass-blur {
+  background: rgba(252, 253, 255, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* The modal sits above a dimmed page, so it can afford to cast further than
+   anything else on the site. */
+.glass-modal {
+  box-shadow: 0 4px 8px rgba(15, 23, 42, 0.06),
+    0 40px 90px -30px rgba(23, 33, 58, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* A lighter stripe across the prism field, for sections that want to read as
+   a separate sheet of glass. Fades at both ends so it never lands as a hard
+   horizontal line. */
+.band {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.42) 10%,
+    rgba(255, 255, 255, 0.42) 90%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   The liquid prism field. One fixed layer behind the whole document.
+   --------------------------------------------------------------------------- */
+.liquid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(
+      130% 90% at 50% -25%,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0) 62%
+    ),
+    linear-gradient(180deg, #fcfdff 0%, #f5f7fc 48%, #eef1f8 100%);
+}
+
+.prism {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  mix-blend-mode: multiply;
+  will-change: transform, translate;
+}
+
+/* `translate` and `transform` are separate properties, so the scroll offset
+   and the idle drift compose without fighting over one declaration — and both
+   still run on the compositor. --sp is scroll progress, 0 to 1, set from
+   LiquidGlass.tsx; each prism turns it into a different distance in a
+   different direction, which is what makes the overlaps shift rather than the
+   whole field just sliding. */
+.prism-1 {
+  width: 46rem;
+  height: 38rem;
+  top: -14rem;
+  left: -12rem;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.58) 0%, rgba(56, 189, 248, 0) 68%);
+  translate: 0 calc(var(--sp, 0) * -150px);
+  animation: prism-a 38s ease-in-out infinite;
+}
+
+.prism-2 {
+  width: 40rem;
+  height: 40rem;
+  top: 6rem;
+  right: -16rem;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.54) 0%, rgba(167, 139, 250, 0) 68%);
+  translate: 0 calc(var(--sp, 0) * 240px);
+  animation: prism-b 47s ease-in-out infinite;
+}
+
+.prism-3 {
+  width: 36rem;
+  height: 30rem;
+  bottom: -8rem;
+  left: 18%;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.44) 0%, rgba(244, 114, 182, 0) 68%);
+  translate: 0 calc(var(--sp, 0) * -340px);
+  animation: prism-c 55s ease-in-out infinite;
+}
+
+.prism-4 {
+  width: 34rem;
+  height: 28rem;
+  top: 42%;
+  left: 34%;
+  background: radial-gradient(circle, rgba(212, 169, 55, 0.48) 0%, rgba(212, 169, 55, 0) 68%);
+  translate: 0 calc(var(--sp, 0) * 120px);
+  animation: prism-d 43s ease-in-out infinite;
+}
+
+@keyframes prism-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(5rem, 3rem, 0) scale(1.12); }
+  66% { transform: translate3d(2rem, 6rem, 0) scale(0.95); }
+}
+
+@keyframes prism-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  40% { transform: translate3d(-5rem, 4rem, 0) scale(1.14); }
+  70% { transform: translate3d(-2rem, -3rem, 0) scale(0.96); }
+}
+
+@keyframes prism-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4rem, -5rem, 0) scale(1.1); }
+}
+
+@keyframes prism-d {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  45% { transform: translate3d(-4rem, -3rem, 0) scale(1.08); }
+}
+
+/* The broad diagonal highlight that makes the whole thing read as one sheet
+   of glass rather than four coloured clouds. Travels faster than any prism,
+   so it slides across them as the page moves. */
+.liquid-sheen {
+  position: absolute;
+  inset: -30% -10%;
+  opacity: 0.4;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0) 26%,
+    rgba(255, 255, 255, 0.85) 44%,
+    rgba(255, 255, 255, 0.5) 52%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  translate: 0 calc(var(--sp, 0) * 440px);
+  will-change: translate;
+}
+
+/* Phones get a much smaller field. Left at desktop sizes the prisms cover the
+   entire screen and the ground stops reading as paper at all. */
+@media (max-width: 768px) {
+  .prism {
+    filter: blur(64px);
+    opacity: 0.72;
+  }
+
+  /* Travel shrinks with the fields. At desktop distances a prism this size
+     would leave the screen well before the page ran out. */
+  .prism-1 { width: 22rem; height: 18rem; top: -6rem; left: -7rem;
+    translate: 0 calc(var(--sp, 0) * -70px); }
+  .prism-2 { width: 20rem; height: 20rem; top: 4rem; right: -8rem;
+    translate: 0 calc(var(--sp, 0) * 115px); }
+  .prism-3 { width: 18rem; height: 15rem; bottom: -4rem; left: 8%;
+    translate: 0 calc(var(--sp, 0) * -160px); }
+  .prism-4 { width: 17rem; height: 14rem; top: 46%; left: 28%;
+    translate: 0 calc(var(--sp, 0) * 58px); }
+
+  .liquid-sheen { translate: 0 calc(var(--sp, 0) * 210px); }
+}
+
+/* ---------------------------------------------------------------------------
+   Section-level atmosphere. Deliberately faint — the fixed prism field is
+   already carrying the colour, and doubling up turns a calm page busy.
+   --------------------------------------------------------------------------- */
+.wash {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  mix-blend-mode: multiply;
+}
+
+.key-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 60% at 50% -10%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0) 62%
+  );
+}
+
+/* Hairline seams instead of flat 1px borders between sections. Inverted from
+   the dark theme: on paper a seam is a darkening, not a lightening. */
+.seam-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(15, 23, 42, 0.08) 30%,
+    rgba(184, 134, 11, 0.32) 50%,
+    rgba(15, 23, 42, 0.08) 70%,
+    transparent 100%
+  );
+}
+
+.bg-grid {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Film grain. A fixed, very low-opacity noise layer over the whole page —
+   it breaks up the banding that large blurred colour fields always produce
+   and gives the paper a bit of tooth. `multiply` rather than `overlay`,
+   because overlay against near-white has almost no effect. */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.022;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #a67c14 0%, #6f4e09 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-tech {
+  background: linear-gradient(
+    135deg,
+    var(--accent-tech-start) 0%,
+    var(--accent-tech-end) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero signature graphic — the real logo, large, with a slow breathing glow
+   behind it and a light sweep across just its own pixels.
+   --------------------------------------------------------------------------- */
+.signature-glow {
+  animation: signature-glow-pulse 6s ease-in-out infinite;
+}
+
+@keyframes signature-glow-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.08); }
+}
+
+/* The sheen was previously an animated `background-position` on a masked
+   element. Two problems: background-position repaints every frame instead of
+   compositing, and the keyframes held still for half the cycle while the
+   easing curve was stretched across the whole of it — so the band crawled,
+   lurched, then stopped dead. Hence "choppy".
+   Now the mask and the moving part are separate elements: the wrapper is
+   clipped to the logo's own alpha and never moves, and a child band slides
+   across it on a pure transform. `screen` blending turns that band into a
+   real specular highlight over the gold and blue rather than a white film. */
+.logo-sheen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  -webkit-mask-image: url("/logo-mark.png");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url("/logo-mark.png");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.logo-sheen::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  left: -70%;
+  width: 60%;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 38%,
+    rgba(255, 255, 255, 0.92) 50%,
+    rgba(255, 255, 255, 0.35) 62%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translate3d(0, 0, 0) rotate(14deg);
+  animation: logo-sheen-sweep 3.5s linear infinite;
+  will-change: transform;
+}
+
+/* `linear` on the animation, with the real curve declared inside the keyframe
+   that starts the moving segment — that way the ease applies to the sweep
+   itself instead of being smeared across the idle part of the cycle. */
+@keyframes logo-sheen-sweep {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(14deg);
+    animation-timing-function: cubic-bezier(0.45, 0.05, 0.3, 1);
+  }
+  62% {
+    transform: translate3d(320%, 0, 0) rotate(14deg);
+  }
+  100% {
+    transform: translate3d(320%, 0, 0) rotate(14deg);
+  }
+}
+
+.float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -12px, 0); }
+}
+
+/* ---------------------------------------------------------------------------
+   Cursor spotlight for rows and cards. The x/y vars are set from JS; when
+   they're absent the highlight simply sits off-canvas and nothing shows.
+   On glass the highlight is white — light passing through the panel — rather
+   than the dark theme's gold glow, which is invisible against paper.
+   --------------------------------------------------------------------------- */
+.spotlight {
+  position: relative;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  background: radial-gradient(
+    22rem circle at var(--spot-x, -100%) var(--spot-y, -100%),
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Thin scroll-progress hairline pinned under the header. */
+.scroll-progress {
+  transform-origin: 0 50%;
+  background: linear-gradient(
+    90deg,
+    var(--accent-tech-start),
+    var(--accent-tech-end) 45%,
+    var(--accent-gold-end)
+  );
+}
+
+/* Animated gradient border ring, used behind cards/buttons that want a
+   moving gradient edge (spins a conic gradient behind a solid inset). */
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--gradient-angle, 0deg),
+    var(--accent-tech-start),
+    var(--accent-tech-end),
+    var(--accent-gold-end),
+    var(--accent-tech-start)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-spin 6s linear infinite;
+  z-index: -1;
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes gradient-spin {
+  to { --gradient-angle: 360deg; }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion means fewer and gentler animations, not none. Movement and
+   position changes go; opacity and colour transitions stay, because those
+   aid comprehension rather than causing motion discomfort.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .pressable:active,
+  .lift:hover {
+    transform: none;
+  }
+
+  .link-underline::after {
+    transition: none;
+    transform: scaleX(1);
+    opacity: 0;
+  }
+
+  .link-underline:hover::after {
+    opacity: 1;
+  }
+
+  /* The prism field keeps its colour and stops moving — both its own drift
+     and its response to scrolling. */
+  .prism,
+  .liquid-sheen {
+    translate: none !important;
+  }
+
+  .prism,
+  .float-slow,
+  .signature-glow,
+  .logo-sheen::after {
+    animation: none;
+  }
+
+  .logo-sheen {
+    display: none;
+  }
+
+  /* Kill looping/decorative animation outright, but leave transitions be. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

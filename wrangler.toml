@@ -1,3 +1,20 @@
 name = "mgrdigitalstudio-com"
-pages_build_output_dir = "dist"
+pages_build_output_dir = "out"
 compatibility_date = "2026-09-21"
+
+# Created via the Cloudflare Developer Platform MCP connector.
+[[d1_databases]]
+binding = "DB"
+database_name = "mgrdigitalstudio-leads"
+database_id = "91535f91-b2e0-4a82-92fb-ddfbde3cd17b"
+
+# ADMIN_PASSWORD is a secret, not set here — provisioned via:
+#   wrangler pages secret put ADMIN_PASSWORD --project-name=mgrdigitalstudio-com
+
+# New-lead email notifications are NOT sent directly from this Pages project —
+# Cloudflare Pages doesn't support the `send_email` binding (Workers-only, as
+# of this Wrangler version). Instead this project calls a small standalone
+# Worker (see email-worker/) over HTTP. EMAIL_WORKER_URL and
+# EMAIL_WORKER_SECRET are Pages secrets, provisioned via:
+#   wrangler pages secret put EMAIL_WORKER_URL --project-name=mgrdigitalstudio-com
+#   wrangler pages secret put EMAIL_WORKER_SECRET --project-name=mgrdigitalstudio-com
