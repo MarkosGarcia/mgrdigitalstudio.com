@@ -9,7 +9,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/business";
 export const metadata: Metadata = {
   title: "New Business Launch Kit",
   description:
-    "Everything a new Ottawa business needs to look real online, in one decision: domain, business email, one-page website, Google Business Profile, social profiles and a QR business card. $1,450.",
+    "Everything a new Ottawa business needs to look real online, in one decision: domain, business email, one-page website, Google Business Profile, social profiles and a QR business card. $2,900.",
 };
 
 const kit = [
@@ -103,14 +103,14 @@ export default function LaunchKitPage() {
 
           <Reveal delayMs={120} className="mt-12">
             <div className="rounded-2xl border border-amber-500/25 glass p-8">
-              <p className="text-4xl font-bold text-ink mb-2">$1,450</p>
+              <p className="text-4xl font-bold text-ink mb-2">$2,900</p>
               <p className="text-sm text-ink-3 leading-relaxed mb-6">
                 All six, done together. Bought separately this is closer to
-                $2,000 and four different conversations.
+                $4,000 and four different conversations.
               </p>
               <p className="text-xs text-ink-4">
                 50% to start, 50% at launch. Website Care optional afterwards at
-                $99/month.
+                $199/month.
               </p>
             </div>
           </Reveal>

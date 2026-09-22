@@ -10,26 +10,26 @@ import { whatsappLink } from "@/lib/whatsapp";
 export const metadata: Metadata = {
   title: "Páginas web en Ottawa — en español",
   description:
-    "Diseño de páginas web para negocios pequeños en Ottawa. Atención en español, precios claros desde $950, y revisión gratuita de su página actual.",
+    "Diseño de páginas web para negocios pequeños en Ottawa. Atención en español, precios claros desde $1,900, y revisión gratuita de su página actual.",
   alternates: { canonical: "https://mgrdigitalstudio.com/es" },
 };
 
 const servicios = [
   {
     nombre: "Página de una sola sección",
-    precio: "Desde $950",
+    precio: "$1,900 – $3,200",
     detalle:
       "Una página enfocada en que la gente lo llame. Ideal si apenas está empezando o si necesita algo rápido.",
   },
   {
     nombre: "Página web completa",
-    precio: "Desde $2,400",
+    precio: "$4,800 – $9,500",
     detalle:
       "De cuatro a ocho secciones: qué hace, dónde trabaja, por qué confiar en usted, y cómo contactarlo.",
   },
   {
     nombre: "Mantenimiento",
-    precio: "Desde $99/mes",
+    precio: "$199 – $349/mes",
     detalle:
       "Actualizaciones, respaldos, y cambios pequeños cuando los necesite. Para que su página no se quede abandonada.",
   },

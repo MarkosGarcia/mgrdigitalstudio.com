@@ -6,22 +6,22 @@ import { GoldButton } from "./Buttons";
 type ProjectType = "landing-page" | "business-website" | "ecommerce";
 
 const projectTypes: { id: ProjectType; label: string; base: number }[] = [
-  { id: "landing-page", label: "Landing Page", base: 950 },
-  { id: "business-website", label: "Business Website", base: 2400 },
-  { id: "ecommerce", label: "Business Website + Online Store", base: 4200 },
+  { id: "landing-page", label: "Landing Page", base: 1900 },
+  { id: "business-website", label: "Business Website", base: 4800 },
+  { id: "ecommerce", label: "Business Website + Online Store", base: 8400 },
 ];
 
 const pageOptions = [
   { id: "1-3", label: "1-3 pages", multiplier: 0 },
-  { id: "4-7", label: "4-7 pages", multiplier: 600 },
-  { id: "8-plus", label: "8+ pages", multiplier: 1400 },
+  { id: "4-7", label: "4-7 pages", multiplier: 1200 },
+  { id: "8-plus", label: "8+ pages", multiplier: 2800 },
 ];
 
 const addOns = [
-  { id: "copywriting", label: "Professional copywriting", cost: 500 },
-  { id: "seo", label: "Local SEO setup", cost: 400 },
-  { id: "booking", label: "Online booking integration", cost: 450 },
-  { id: "growth", label: "Ongoing Website Growth plan", cost: 650 },
+  { id: "copywriting", label: "Professional copywriting", cost: 1000 },
+  { id: "seo", label: "Local SEO setup", cost: 800 },
+  { id: "booking", label: "Online booking integration", cost: 900 },
+  { id: "growth", label: "Ongoing Website Growth plan", cost: 1300 },
 ];
 
 export const QuoteCalculator: React.FC = () => {

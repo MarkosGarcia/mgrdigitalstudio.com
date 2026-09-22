@@ -32,12 +32,10 @@ const siteUrl = "https://mgrdigitalstudio.com";
 /**
  * "How much does a small business website cost in Ottawa" is the question this
  * business most wants to be the answer to, and an answer engine will only
- * repeat a number it can read as a number. `From $950` in a heading is prose;
- * an Offer with a price and a currency is a fact it can quote.
+ * repeat a number it can read as a number. A price range in a heading is
+ * prose; an Offer with a min/max price and a currency is a fact it can quote.
  */
 function serviceJsonLd(service: NonNullable<ReturnType<typeof getService>>) {
-  const price = service.startingPrice.replace(/[^0-9]/g, "");
-
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -53,25 +51,23 @@ function serviceJsonLd(service: NonNullable<ReturnType<typeof getService>>) {
       { "@type": "Country", name: "United States" },
     ],
     availableLanguage: ["en", "es"],
-    ...(price
-      ? {
-          offers: {
-            "@type": "Offer",
-            price,
-            priceCurrency: "CAD",
-            // The listed figure is a starting point, not a fixed rate, and
-            // saying so in the markup is more honest than publishing it bare.
-            priceSpecification: {
-              "@type": "PriceSpecification",
-              minPrice: price,
-              priceCurrency: "CAD",
-              valueAddedTaxIncluded: false,
-            },
-            availability: "https://schema.org/InStock",
-            url: `${siteUrl}/services/${service.slug}/`,
-          },
-        }
-      : {}),
+    offers: {
+      "@type": "Offer",
+      price: service.priceLow,
+      priceCurrency: "CAD",
+      // A range, not a single rate — the markup should say the same thing
+      // the page says, rather than flattening it to one bare number.
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        minPrice: service.priceLow,
+        maxPrice: service.priceHigh,
+        priceCurrency: "CAD",
+        unitText: service.priceUnit === "month" ? "MON" : undefined,
+        valueAddedTaxIncluded: false,
+      },
+      availability: "https://schema.org/InStock",
+      url: `${siteUrl}/services/${service.slug}/`,
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `What's included in ${service.name}`,
@@ -149,8 +145,9 @@ export default async function ServiceDetailPage(
             <div className="border-t border-hair pt-6">
               <p className="text-2xl font-bold text-ink mb-2">{service.startingPrice}</p>
               <p className="text-sm text-ink-4 leading-relaxed mb-5">
-                What moves it is the number of pages and whether you need the
-                writing done. You get a fixed number before we start.
+                Where you land in that range depends on the number of pages
+                and whether you need the writing done. You get a fixed number,
+                scoped to your project, before we start.
               </p>
               <PaymentButton serviceSlug={service.slug} className="w-full" />
             </div>

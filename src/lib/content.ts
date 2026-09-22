@@ -7,7 +7,15 @@ export type Service = {
   longDescription: string;
   features: string[];
   idealFor: string[];
+  /** Display string — a range, not a bare floor. A single "From $X" figure
+   *  invites everyone to assume that's the price; a range sets expectations
+   *  honestly while still giving an answer engine a real number to quote. */
   startingPrice: string;
+  /** Numeric low/high in CAD, for the page's structured data — kept separate
+   *  from the display string above so the JSON-LD never has to parse prose. */
+  priceLow: number;
+  priceHigh: number;
+  priceUnit: "project" | "month";
 };
 
 export const services: Service[] = [
@@ -28,7 +36,10 @@ export const services: Service[] = [
       "Set up so you can see what's working",
     ],
     idealFor: ["Google or Facebook ads", "A seasonal promotion", "Launching one new service"],
-    startingPrice: "From $950",
+    startingPrice: "$1,900 – $3,200",
+    priceLow: 1900,
+    priceHigh: 3200,
+    priceUnit: "project",
   },
   {
     slug: "business-websites",
@@ -47,7 +58,10 @@ export const services: Service[] = [
       "Hosting and launch handled",
     ],
     idealFor: ["Trades and home services", "Clinics and practices", "Anyone whose site is five years old"],
-    startingPrice: "From $2,400",
+    startingPrice: "$4,800 – $9,500",
+    priceLow: 4800,
+    priceHigh: 9500,
+    priceUnit: "project",
   },
   {
     slug: "website-care",
@@ -66,7 +80,10 @@ export const services: Service[] = [
       "You email me directly — no ticket queue",
     ],
     idealFor: ["No one in-house who handles this", "Sites taking bookings or payments"],
-    startingPrice: "From $99/month",
+    startingPrice: "$199 – $349 /month",
+    priceLow: 199,
+    priceHigh: 349,
+    priceUnit: "month",
   },
   {
     slug: "website-growth",
@@ -85,7 +102,10 @@ export const services: Service[] = [
       "A call every quarter to decide what's next",
     ],
     idealFor: ["Sites already getting traffic", "Businesses spending on ads"],
-    startingPrice: "From $650/month",
+    startingPrice: "$1,300 – $2,600 /month",
+    priceLow: 1300,
+    priceHigh: 2600,
+    priceUnit: "month",
   },
 ];
 
@@ -137,6 +157,12 @@ export type Project = {
   url: string;
   sector: string;
   summary: string;
+  /** What the client's site had to solve, before any design happened. */
+  problem: string;
+  /** What the site actually does about it — the real, specific choices,
+   *  not a feature list. No invented metrics: only claims that are true
+   *  of what shipped, not guesses about what it caused. */
+  approach: string;
   built: string[];
 };
 
@@ -150,6 +176,10 @@ export const projects: Project[] = [
     sector: "Original art · Ottawa",
     summary:
       "Large-scale original paintings for luxury homes — statement pieces up to 8'×4' for foyers, great rooms and stairwells. The work is the product, so the site had to get out of its own way and let the paintings fill the screen.",
+    problem:
+      "An artist selling large, expensive, one-of-a-kind pieces to design-conscious buyers. A generic template would have competed with the paintings instead of showcasing them, and buyers at this price point expect to see the work at real scale before they'll ask about a piece.",
+    approach:
+      "A gallery-led layout that puts every painting full-bleed and lets it fill the screen, with the enquiry form kept out of the way until someone's actually ready to ask about a piece. Built mobile-first, since a buyer forwarding a link to a partner or a designer is looking at it on a phone.",
     built: ["Gallery-led layout", "Enquiry form", "Mobile-first"],
   },
   {
@@ -159,6 +189,10 @@ export const projects: Project[] = [
     sector: "Flooring · Ottawa",
     summary:
       "Owner-operated flooring installation — tile and stone, vinyl, laminate and carpet. A trades site where the whole job is making it obvious what he installs, that he's WSIB insured, and how to get a free estimate without hunting for a number.",
+    problem:
+      "A one-person flooring business competing against larger installers who show up first in search. Homeowners comparing quotes decide fast, and a site that buries the phone number or doesn't say WSIB-insured up front loses that comparison before a call even happens.",
+    approach:
+      "Click-to-call in the header on every screen, WSIB insurance stated where a homeowner is actually looking for it, and a free-estimate flow that asks for the job details up front instead of making someone wait for a callback to find out if it's even worth booking.",
     built: ["Click-to-call", "Free estimate flow", "Trust signals up front"],
   },
 ];
@@ -219,7 +253,7 @@ export const faqs: FaqItem[] = [
   {
     question: "How much does it cost?",
     answer:
-      "Landing pages from $950. Business websites from $2,400. Care plans from $99/month, growth work from $650/month. What moves the number is how many pages there are and whether you need the writing done. You get a fixed quote before anything starts — no hourly surprises.",
+      "Landing pages typically run $1,900–$3,200. Business websites run $4,800–$9,500. Care plans are $199–$349/month, growth work $1,300–$2,600/month. What moves you within the range is how many pages there are and whether you need the writing done. You get a fixed number before anything starts — no hourly surprises.",
   },
   {
     question: "How long does it take?",

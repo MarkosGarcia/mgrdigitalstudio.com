@@ -23,36 +23,22 @@ export const LogoMark: React.FC<{ className?: string; animated?: boolean }> = ({
   </div>
 );
 
-export const Wordmark: React.FC<{
-  showTagline?: boolean;
-  size?: "sm" | "md" | "lg";
-}> = ({ showTagline = true, size = "md" }) => {
-  const textSize =
-    size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-lg";
-
-  return (
-    <div className="flex flex-col">
-      <span
-        className={`${textSize} font-bold tracking-tight text-ink font-sans leading-tight`}
-      >
-        MGR <span className="text-gold">Digital Studio</span>
-      </span>
-      {showTagline && (
-        <span className="text-[10px] text-ink-3 font-medium tracking-wide hidden sm:block">
-          Websites · Landing Pages · SEO · Marketing
-        </span>
-      )}
-    </div>
-  );
-};
-
-export const Logo: React.FC<{
-  showTagline?: boolean;
-  markClassName?: string;
-  size?: "sm" | "md" | "lg";
-}> = ({ showTagline = true, markClassName, size = "md" }) => (
-  <span className="flex items-center gap-3 group">
-    <LogoMark className={markClassName} />
-    <Wordmark showTagline={showTagline} size={size} />
+// The full icon + "MGR Digital Studio" lockup as one image, cropped from the
+// same supplied artwork just above where its own tagline line starts (that
+// tagline is its own line at header scale, not a second thing to render next
+// to it — see the capabilities list on the Services page instead). Replaces
+// the earlier icon-image + live-CSS-wordmark pairing.
+export const Logo: React.FC<{ className?: string }> = ({
+  className = "h-9 w-auto",
+}) => (
+  <span className={`inline-block ${className}`}>
+    <Image
+      src="/logo-lockup.png"
+      alt="MGR Digital Studio"
+      width={700}
+      height={307}
+      priority
+      className="w-full h-full object-contain"
+    />
   </span>
 );

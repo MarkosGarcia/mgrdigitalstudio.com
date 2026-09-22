@@ -8,7 +8,7 @@ import { ParallaxBackground } from "@/components/ParallaxBackground";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Landing pages, business websites, website care and ongoing improvement work, plus SEO, Google Business Profile optimization, conversion optimization, AI search optimization, marketing, marketing automation, analytics and paid advertising. Fixed quotes, starting at $950.",
+    "Landing pages, business websites, website care and ongoing improvement work, plus SEO, Google Business Profile optimization, conversion optimization, AI search optimization, marketing, marketing automation, analytics and paid advertising. Custom-scoped engagements, quoted per project.",
 };
 
 export default function ServicesPage() {
@@ -25,8 +25,10 @@ export default function ServicesPage() {
               Two ways to build it. Two ways to keep it working.
             </h1>
             <p className="text-lg text-ink-3 leading-relaxed">
-              Prices below are where each one starts. You get a fixed quote
-              before anything begins, so there&apos;s no hourly meter running.
+              For businesses that want a full digital partner, not just a
+              website. The ranges below cover most projects — you get a fixed
+              quote before anything begins, so there&apos;s no hourly meter
+              running.
             </p>
           </Reveal>
         </div>

@@ -37,9 +37,9 @@ export default function WorkPage() {
               Sites you can actually go and look at.
             </h1>
             <p className="text-lg text-ink-3 leading-relaxed">
-              Two Ottawa businesses, both live. Click through and judge the
-              work directly — that&apos;s more useful than anything I could
-              claim about it.
+              Two Ottawa businesses, both live. Here&apos;s the actual problem
+              each one needed solved, not just a list of pages — then click
+              through and judge the result directly.
             </p>
           </Reveal>
         </div>
@@ -68,6 +68,21 @@ export default function WorkPage() {
                   <p className="text-sm text-ink-3 leading-relaxed mb-6 max-w-xl">
                     {project.summary}
                   </p>
+
+                  <div className="grid gap-5 sm:grid-cols-2 mb-6 max-w-xl">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-ink-4 mb-2">
+                        The problem
+                      </p>
+                      <p className="text-sm text-ink-3 leading-relaxed">{project.problem}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-ink-4 mb-2">
+                        What the site does about it
+                      </p>
+                      <p className="text-sm text-ink-3 leading-relaxed">{project.approach}</p>
+                    </div>
+                  </div>
 
                   <div className="flex flex-wrap items-center gap-2 mb-6">
                     {project.built.map((tag) => (

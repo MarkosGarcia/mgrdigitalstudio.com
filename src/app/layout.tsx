@@ -93,7 +93,7 @@ const jsonLd = {
       email: EMAIL,
       image: `${siteUrl}/og-image.jpg`,
       logo: `${siteUrl}/logo-mark.png`,
-      priceRange: "CA$950–CA$5,000",
+      priceRange: "CA$1,900–CA$9,500",
       currenciesAccepted: "CAD",
       knowsLanguage: ["en", "es"],
       knowsAbout: [
