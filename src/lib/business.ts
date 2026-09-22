@@ -1,15 +1,12 @@
-// Single source of truth for contact + legal identity, so a number or a
-// legal-name change is one edit rather than a hunt through every page.
+// Single source of truth for contact identity, so a number or a name change
+// is one edit rather than a hunt through every page.
 
 export const PHONE_DISPLAY = "613-513-7243";
 export const PHONE_HREF = "tel:+16135137243";
 export const EMAIL = "info@mgrdigitalstudio.com";
 export const EMAIL_HREF = `mailto:${EMAIL}`;
 
-/** Trading/brand name — what customers see. */
 export const BRAND_NAME = "MGR Digital Studio";
-/** Registered business name behind the brand. */
-export const LEGAL_NAME = "S&G Marketing";
 
 export const CITY = "Ottawa, Ontario";
 export const ADDRESS_STREET = "702 Maloja Way, Stittsville";

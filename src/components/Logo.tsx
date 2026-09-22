@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-// The approved MGR Digital Studio monogram, cut out from its source render
-// with a saturation + border-connectivity chroma key (metallic highlights
-// keep their own antialiased edge; the checkerboard/shadow background is
-// removed) and saved with real alpha, so it drops onto the glass theme's
-// paper background and translucent panels alike without a background box.
+// The approved MGR Digital Studio monogram, cropped from the supplied
+// artwork (which already ships with real alpha) to isolate just the icon
+// from the fuller icon+wordmark+tagline lockup, so it drops onto the glass
+// theme's paper background and translucent panels alike without a
+// background box.
 export const LogoMark: React.FC<{ className?: string; animated?: boolean }> = ({
   className = "h-10 w-auto",
   animated = false,
@@ -15,7 +15,7 @@ export const LogoMark: React.FC<{ className?: string; animated?: boolean }> = ({
       src="/logo-mark.png"
       alt=""
       width={700}
-      height={379}
+      height={254}
       priority
       className="w-full h-full object-contain drop-shadow-[0_4px_14px_rgba(15,23,42,0.12)]"
     />

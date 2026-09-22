@@ -9,7 +9,6 @@ import {
   PHONE_HREF,
   EMAIL,
   EMAIL_HREF,
-  LEGAL_NAME,
   BRAND_NAME,
   HAS_PORTRAIT,
   PORTRAIT_SRC,
@@ -173,8 +172,7 @@ export default function AboutPage() {
 
           <Reveal delayMs={200} className="mt-14 pt-8 border-t border-hair">
             <p className="text-xs text-ink-4 leading-relaxed">
-              {BRAND_NAME} is the trading name of {LEGAL_NAME}, based in Ottawa,
-              Ontario.
+              {BRAND_NAME} is based in Ottawa, Ontario.
             </p>
           </Reveal>
         </div>

@@ -11,7 +11,6 @@ import { Analytics } from "@/components/Analytics";
 import { LiquidGlass } from "@/components/LiquidGlass";
 import {
   BRAND_NAME,
-  LEGAL_NAME,
   EMAIL,
   PHONE_HREF,
   ADDRESS_STREET,
@@ -87,8 +86,6 @@ const jsonLd = {
       "@type": "ProfessionalService",
       "@id": `${siteUrl}/#business`,
       name: BRAND_NAME,
-      alternateName: [LEGAL_NAME],
-      legalName: LEGAL_NAME,
       description:
         "A small web design shop in Ottawa building websites and landing pages for small businesses, plus ongoing care and improvement after launch.",
       url: siteUrl,

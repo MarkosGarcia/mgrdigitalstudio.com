@@ -8,7 +8,6 @@ import {
   EMAIL,
   EMAIL_HREF,
   BRAND_NAME,
-  LEGAL_NAME,
   HOURS,
 } from "@/lib/business";
 
@@ -106,7 +105,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-14 pt-8 border-t border-hair flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-ink-4">
-            &copy; {year} {LEGAL_NAME}, operating as {BRAND_NAME}.
+            &copy; {year} {BRAND_NAME}. All rights reserved.
           </p>
           <p className="text-xs text-ink-4">
             Ottawa, Ontario, Canada &middot; Serving Canada &amp; the U.S.
