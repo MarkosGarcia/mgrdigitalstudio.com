@@ -27,7 +27,7 @@ export default function ReviewsPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-ink tracking-tight leading-[1.1] mb-7">
               {quotes.length > 0
                 ? "What clients say."
-                : "Two clients so far. Both sites are live."}
+                : `${projects.length} clients so far. All sites are live.`}
             </h1>
             <p className="text-lg text-ink-3 leading-relaxed">
               {quotes.length > 0

@@ -180,6 +180,19 @@ export const projects: Project[] = [
       "Click-to-call in the header on every screen, WSIB insurance stated where a homeowner is actually looking for it, and a free-estimate flow that asks for the job details up front instead of making someone wait for a callback to find out if it's even worth booking.",
     built: ["Click-to-call", "Free estimate flow", "Trust signals up front"],
   },
+  {
+    client: "Pat Smith",
+    business: "Pat Smith Cards",
+    url: "https://patsmithcards.ca/",
+    sector: "Handmade cards · Stittsville & Ottawa",
+    summary:
+      "Custom cards designed and handmade to order — a specific scripture, greeting or message, inside or out. Each one made for the person receiving it, not pulled off a rack.",
+    problem:
+      "A one-person handmade card business selling something inherently personal and hard to judge from a thumbnail. A stranger has to believe \"custom to your spec\" is real, and needs an easy way to actually describe what they want — an occasion, a scripture, specific wording — without a back-and-forth just to place an order.",
+    approach:
+      "A gallery built around real finished cards so the craft speaks for itself, plus a straightforward way to request a custom piece — occasion, message, and any specific wording — instead of a generic contact form that leaves the customer guessing what to include.",
+    built: ["Gallery of real card samples", "Custom order request", "Mobile-first"],
+  },
 ];
 
 export type Testimonial = {

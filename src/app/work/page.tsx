@@ -8,7 +8,7 @@ import { projects } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Our Work",
   description:
-    "Websites built for Ottawa businesses — Courtney Janelle Studio and BBJ Flooring Corp. Real clients, real sites you can visit.",
+    "Websites built for Ottawa-area businesses — Courtney Janelle Studio, BBJ Flooring Corp, and Pat Smith Cards. Real clients, real sites you can visit.",
 };
 
 const ArrowIcon = () => (
@@ -37,9 +37,9 @@ export default function WorkPage() {
               Sites you can actually go and look at.
             </h1>
             <p className="text-lg text-ink-3 leading-relaxed">
-              Two Ottawa businesses, both live. Here&apos;s the actual problem
-              each one needed solved, not just a list of pages — then click
-              through and judge the result directly.
+              Three Ottawa-area businesses, all live. Here&apos;s the actual
+              problem each one needed solved, not just a list of pages — then
+              click through and judge the result directly.
             </p>
           </Reveal>
         </div>
