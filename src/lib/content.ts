@@ -298,20 +298,21 @@ export const processSteps: ProcessStep[] = [
 ];
 
 // The honest counterweight to a sales page: saying plainly who I'm wrong for
-// does more for trust than another paragraph about how great I are.
+// does more for trust than another paragraph about how great I are. Kept
+// short and to things that are durably true — not speed or price (both are
+// currently strengths, not disqualifiers) and not scope (bigger or more
+// specialized work gets taken on directly or handed to a trusted partner,
+// rather than turned away outright).
 export const notAFit: string[] = [
-  "You need it live this week.",
-  "You want the cheapest possible site and nothing else matters.",
-  "You're after a big brand identity project — logos, packaging, campaigns.",
-  "You need a complex web app, a marketplace, or a custom booking system.",
-  "You want someone to run your social media and ads as well.",
+  "You want to hand off the project and never look at it again — I'll still need your input and feedback along the way.",
+  "Anything well outside straightforward web and marketing work — a full brand identity system, a custom app, a big ad campaign. Happy to talk it through either way: I'll take it on directly or bring in someone I trust, so you're not left managing two vendors.",
 ];
 
 export const aFit: string[] = [
   "You run a small business and your website isn't pulling its weight.",
   "You'd rather have four pages that work than twelve that don't.",
   "You want to talk to the person actually building it.",
-  "You can get me content and feedback within a week or so.",
+  "You want it done fast — some projects have gone live the very next day.",
 ];
 
 export type BlogPost = {

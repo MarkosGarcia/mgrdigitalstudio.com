@@ -45,9 +45,9 @@ export const FitSection: React.FC = () => {
 
         <Reveal delayMs={200}>
           <p className="mt-14 text-sm text-ink-4 max-w-2xl leading-relaxed">
-            All real needs — just not what we&apos;re set up to do well. If
-            you&apos;re in the right-hand column, say so on the first call and
-            we&apos;ll point you to someone better suited.
+            Neither of those rules you out on its own — say so on the first
+            call and we&apos;ll figure out the right way to handle it, either
+            together or through someone I trust.
           </p>
         </Reveal>
       </div>

@@ -103,12 +103,12 @@ export const Footer: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-14 pt-8 border-t border-hair flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 pt-8 border-t border-hair flex flex-col sm:flex-row items-center justify-between gap-4 sm:pr-20">
           <p className="text-xs text-ink-4">
             &copy; {year} {BRAND_NAME}. All rights reserved.
           </p>
-          <p className="text-xs text-ink-4">
-            Ottawa, Ontario, Canada &middot; Serving Canada &amp; the U.S.
+          <p className="text-xs text-ink-4 sm:text-right sm:max-w-xs">
+            Ottawa, Ontario, Canada &middot; Serving Canada, the U.S. &amp; Internationally in English and Spanish
           </p>
         </div>
       </div>
