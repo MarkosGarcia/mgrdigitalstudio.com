@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { CTASection } from "@/components/CTASection";
-import { services } from "@/lib/content";
+import { services, capabilities } from "@/lib/content";
 import { ParallaxBackground } from "@/components/ParallaxBackground";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Landing pages, business websites, website care and ongoing improvement work. Fixed quotes, starting at $950.",
+    "Landing pages, business websites, website care and ongoing improvement work, plus SEO, Google Business Profile optimization, conversion optimization, AI search optimization, marketing, marketing automation, analytics and paid advertising. Fixed quotes, starting at $950.",
 };
 
 export default function ServicesPage() {
@@ -58,6 +58,33 @@ export default function ServicesPage() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="pb-24 md:pb-32 bg-transparent">
+        <div className="max-w-3xl mx-auto px-6">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold/90 mb-4">
+              Also part of the toolkit
+            </p>
+            <h2 className="text-2xl md:text-3xl font-bold text-ink tracking-tight leading-tight mb-4">
+              SEO, marketing, and everything that gets you found.
+            </h2>
+            <p className="text-sm text-ink-3 leading-relaxed mb-10 max-w-xl">
+              These get scoped on a call rather than quoted sight-unseen —
+              most often bundled into a Business Website or a Website Growth
+              plan, not sold on their own.
+            </p>
+          </Reveal>
+
+          <Reveal delayMs={80} className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            {capabilities.map((c) => (
+              <div key={c.name}>
+                <h3 className="text-sm font-semibold text-ink mb-1">{c.name}</h3>
+                <p className="text-sm text-ink-3 leading-relaxed">{c.description}</p>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </section>
 

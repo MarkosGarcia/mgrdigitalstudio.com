@@ -96,6 +96,18 @@ const jsonLd = {
       priceRange: "CA$950–CA$5,000",
       currenciesAccepted: "CAD",
       knowsLanguage: ["en", "es"],
+      knowsAbout: [
+        "Websites",
+        "Landing Pages",
+        "SEO",
+        "Google Business Profile Optimization",
+        "Conversion Optimization",
+        "AI Search Optimization",
+        "Marketing",
+        "Marketing Automation",
+        "Analytics",
+        "Paid Advertising",
+      ],
       founder: { "@id": `${siteUrl}/#marcos` },
       address: {
         "@type": "PostalAddress",

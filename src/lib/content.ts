@@ -89,6 +89,48 @@ export const services: Service[] = [
   },
 ];
 
+export type Capability = { name: string; description: string };
+
+/**
+ * The broader toolkit — real skills, not fixed-price packages like the four
+ * above. These get scoped on a call rather than quoted sight-unseen, so they
+ * show up as a plain list rather than another set of "starting at" cards.
+ */
+export const capabilities: Capability[] = [
+  {
+    name: "SEO",
+    description: "Getting found in Google for what you actually do, not just your business name.",
+  },
+  {
+    name: "Google Business Profile Optimization",
+    description: "The map listing that shows up before your website does, filled in properly and kept current.",
+  },
+  {
+    name: "Conversion Optimization",
+    description: "Turning the traffic you already get into more calls and bookings, without spending more on ads.",
+  },
+  {
+    name: "AI Search Optimization",
+    description: "Showing up when someone asks ChatGPT or Google's AI answers instead of typing a search.",
+  },
+  {
+    name: "Marketing",
+    description: "Planning and running the campaigns that bring people to the site in the first place.",
+  },
+  {
+    name: "Marketing Automation",
+    description: "Follow-up emails and reminders that go out on their own, so no lead sits ignored.",
+  },
+  {
+    name: "Analytics",
+    description: "Knowing what's actually happening on your site — where visitors come from, and where they leave.",
+  },
+  {
+    name: "Paid Advertising",
+    description: "Google and Meta ads set up and managed so the budget goes to people likely to actually call.",
+  },
+];
+
 export type Project = {
   client: string;
   business: string;
