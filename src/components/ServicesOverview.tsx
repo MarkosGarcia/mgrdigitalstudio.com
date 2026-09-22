@@ -30,7 +30,6 @@ export const ServicesOverview: React.FC = () => {
                   <h3 className="text-lg font-semibold text-ink group-hover:text-gold transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-xs text-ink-4 mt-1">{service.startingPrice}</p>
                 </div>
                 <p className="text-sm text-ink-3 leading-relaxed flex-1">
                   {service.description}

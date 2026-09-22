@@ -14,8 +14,8 @@ export const Hero: React.FC = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-14 lg:gap-16 items-center">
           <div className="max-w-xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold/90 mb-3">
-              Web design · Ottawa
+            <p className="font-serif italic text-2xl md:text-3xl tracking-wide text-gold mb-4">
+              Web Design &amp; Marketing · Ottawa
             </p>
             <p className="text-sm md:text-base font-bold uppercase tracking-[0.1em] text-gold mb-6">
               Turning Visitors Into Customers

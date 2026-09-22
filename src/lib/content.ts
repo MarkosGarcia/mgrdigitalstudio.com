@@ -7,17 +7,18 @@ export type Service = {
   longDescription: string;
   features: string[];
   idealFor: string[];
-  /** Display string — a range, not a bare floor. A single "From $X" figure
-   *  invites everyone to assume that's the price; a range sets expectations
-   *  honestly while still giving an answer engine a real number to quote. */
-  startingPrice: string;
-  /** Numeric low/high in CAD, for the page's structured data — kept separate
-   *  from the display string above so the JSON-LD never has to parse prose. */
-  priceLow: number;
-  priceHigh: number;
-  priceUnit: "project" | "month";
 };
 
+/**
+ * No public pricing, by decision — a visible number this early reads as
+ * "budget," and it invites comparison-shopping before anyone's talked to a
+ * real person. Every page instead points to a call or the contact form,
+ * where the actual scope gets discussed before a number does.
+ *
+ * Internal reference only, never rendered: landing pages ~$1,900–$3,200,
+ * business websites ~$4,800–$9,500, website care ~$199–$349/month, website
+ * growth ~$1,300–$2,600/month.
+ */
 export const services: Service[] = [
   {
     slug: "landing-pages",
@@ -36,10 +37,6 @@ export const services: Service[] = [
       "Set up so you can see what's working",
     ],
     idealFor: ["Google or Facebook ads", "A seasonal promotion", "Launching one new service"],
-    startingPrice: "$1,900 – $3,200",
-    priceLow: 1900,
-    priceHigh: 3200,
-    priceUnit: "project",
   },
   {
     slug: "business-websites",
@@ -58,10 +55,6 @@ export const services: Service[] = [
       "Hosting and launch handled",
     ],
     idealFor: ["Trades and home services", "Clinics and practices", "Anyone whose site is five years old"],
-    startingPrice: "$4,800 – $9,500",
-    priceLow: 4800,
-    priceHigh: 9500,
-    priceUnit: "project",
   },
   {
     slug: "website-care",
@@ -80,10 +73,6 @@ export const services: Service[] = [
       "You email me directly — no ticket queue",
     ],
     idealFor: ["No one in-house who handles this", "Sites taking bookings or payments"],
-    startingPrice: "$199 – $349 /month",
-    priceLow: 199,
-    priceHigh: 349,
-    priceUnit: "month",
   },
   {
     slug: "website-growth",
@@ -102,10 +91,6 @@ export const services: Service[] = [
       "A call every quarter to decide what's next",
     ],
     idealFor: ["Sites already getting traffic", "Businesses spending on ads"],
-    startingPrice: "$1,300 – $2,600 /month",
-    priceLow: 1300,
-    priceHigh: 2600,
-    priceUnit: "month",
   },
 ];
 
@@ -248,12 +233,12 @@ export const faqs: FaqItem[] = [
   {
     question: "How new is this business?",
     answer:
-      "New — I started in 2026 and I'm still building my client roster. You can see the sites I've built on the Work page and visit them yourself. That's exactly why the early pricing is what it is, and why you'll get more attention than you would from a shop with forty accounts on the go. If you'd rather hire someone with fifteen years of case studies, that's a completely reasonable call and I won't try to talk you out of it.",
+      "New — I started in 2026 and I'm still building my client roster. You can see the sites I've built on the Work page and visit them yourself. That also means you get more attention than you would from a shop with forty accounts on the go. If you'd rather hire someone with fifteen years of case studies, that's a completely reasonable call and I won't try to talk you out of it.",
   },
   {
     question: "How much does it cost?",
     answer:
-      "Landing pages typically run $1,900–$3,200. Business websites run $4,800–$9,500. Care plans are $199–$349/month, growth work $1,300–$2,600/month. What moves you within the range is how many pages there are and whether you need the writing done. You get a fixed number before anything starts — no hourly surprises.",
+      "It depends on what you actually need — the number of pages, whether you need the writing done, and what happens after launch. Rather than publish a figure that's wrong for your situation, I'll ask a few questions on a free call or through the quote request form and come back with a fixed, itemized number. No hourly billing, no surprises, no obligation to say yes.",
   },
   {
     question: "How long does it take?",

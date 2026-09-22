@@ -8,7 +8,7 @@ import { ParallaxBackground } from "@/components/ParallaxBackground";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Landing pages, business websites, website care and ongoing improvement work, plus SEO, Google Business Profile optimization, conversion optimization, AI search optimization, marketing, marketing automation, analytics and paid advertising. Custom-scoped engagements, quoted per project.",
+    "Landing pages, business websites, website care and ongoing improvement work, plus SEO, Google Business Profile optimization, conversion optimization, AI search optimization, marketing, marketing automation, analytics and paid advertising. Custom-scoped engagements — request a quote after a short call.",
 };
 
 export default function ServicesPage() {
@@ -26,9 +26,9 @@ export default function ServicesPage() {
             </h1>
             <p className="text-lg text-ink-3 leading-relaxed">
               For businesses that want a full digital partner, not just a
-              website. The ranges below cover most projects — you get a fixed
-              quote before anything begins, so there&apos;s no hourly meter
-              running.
+              website. Every project gets a fixed quote scoped to what you
+              actually need, worked out on a short call — no hourly meter,
+              no guessing from a price list.
             </p>
           </Reveal>
         </div>
@@ -39,12 +39,7 @@ export default function ServicesPage() {
           {services.map((service, i) => (
             <Reveal key={service.slug} delayMs={i * 80}>
               <div className="py-10 border-b border-hair">
-                <div className="flex items-baseline justify-between gap-4 mb-4">
-                  <h2 className="text-xl font-semibold text-ink">{service.name}</h2>
-                  <span className="text-sm text-ink-4 shrink-0">
-                    {service.startingPrice}
-                  </span>
-                </div>
+                <h2 className="text-xl font-semibold text-ink mb-4">{service.name}</h2>
                 <p className="text-sm text-ink-3 leading-relaxed mb-6">
                   {service.longDescription}
                 </p>

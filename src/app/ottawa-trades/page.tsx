@@ -9,7 +9,7 @@ import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/business";
 export const metadata: Metadata = {
   title: "Websites for Ottawa Trades",
   description:
-    "Websites for Ottawa plumbers, electricians, roofers, landscapers and flooring contractors. Built by a licensed gas technician who's been on the tools. From $1,900.",
+    "Websites for Ottawa plumbers, electricians, roofers, landscapers and flooring contractors. Built by a licensed gas technician who's been on the tools. Free quote after a short call.",
 };
 
 const problems = [
@@ -123,9 +123,9 @@ export default function OttawaTradesPage() {
           </ul>
 
           <Reveal delayMs={120} className="mt-10 flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-6">
-            <p className="text-2xl font-bold text-ink">$1,900 – $3,200</p>
+            <p className="text-lg font-semibold text-ink">Free quote, no obligation</p>
             <p className="text-sm text-ink-4">
-              One page, live in about two weeks. Full site $4,800 – $9,500.
+              One page, live in about two weeks — a full site takes a bit longer.
             </p>
           </Reveal>
 

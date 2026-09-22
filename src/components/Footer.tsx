@@ -19,7 +19,7 @@ const columns: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "/services/business-websites", label: "Business Websites" },
       { href: "/services/website-care", label: "Website Care" },
       { href: "/launch-kit", label: "New Business Launch Kit" },
-      { href: "/quote-calculator", label: "Quote Calculator" },
+      { href: "/quote-calculator", label: "Request a Quote" },
     ],
   },
   {

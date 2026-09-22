@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { Reveal } from "@/components/Reveal";
 import { CTASection } from "@/components/CTASection";
 import { GoldButton, OutlineLink } from "@/components/Buttons";
-import { PaymentButton } from "@/components/PaymentButton";
 import { services } from "@/lib/content";
 import { ParallaxBackground } from "@/components/ParallaxBackground";
 
@@ -30,10 +29,9 @@ export async function generateMetadata(
 const siteUrl = "https://mgrdigitalstudio.com";
 
 /**
- * "How much does a small business website cost in Ottawa" is the question this
- * business most wants to be the answer to, and an answer engine will only
- * repeat a number it can read as a number. A price range in a heading is
- * prose; an Offer with a min/max price and a currency is a fact it can quote.
+ * No `offers`/price here by decision — pricing is quoted after a call, not
+ * published. `hasOfferCatalog` still tells an answer engine what's included
+ * in the service without stating what it costs.
  */
 function serviceJsonLd(service: NonNullable<ReturnType<typeof getService>>) {
   return {
@@ -51,23 +49,6 @@ function serviceJsonLd(service: NonNullable<ReturnType<typeof getService>>) {
       { "@type": "Country", name: "United States" },
     ],
     availableLanguage: ["en", "es"],
-    offers: {
-      "@type": "Offer",
-      price: service.priceLow,
-      priceCurrency: "CAD",
-      // A range, not a single rate — the markup should say the same thing
-      // the page says, rather than flattening it to one bare number.
-      priceSpecification: {
-        "@type": "PriceSpecification",
-        minPrice: service.priceLow,
-        maxPrice: service.priceHigh,
-        priceCurrency: "CAD",
-        unitText: service.priceUnit === "month" ? "MON" : undefined,
-        valueAddedTaxIncluded: false,
-      },
-      availability: "https://schema.org/InStock",
-      url: `${siteUrl}/services/${service.slug}/`,
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `What's included in ${service.name}`,
@@ -143,13 +124,13 @@ export default async function ServiceDetailPage(
             </ul>
 
             <div className="border-t border-hair pt-6">
-              <p className="text-2xl font-bold text-ink mb-2">{service.startingPrice}</p>
+              <p className="text-lg font-semibold text-ink mb-2">Custom quote</p>
               <p className="text-sm text-ink-4 leading-relaxed mb-5">
-                Where you land in that range depends on the number of pages
-                and whether you need the writing done. You get a fixed number,
-                scoped to your project, before we start.
+                Priced around the number of pages and whether you need the
+                writing done — not a price list. Tell me what you&apos;re
+                after and I&apos;ll come back with a fixed number.
               </p>
-              <PaymentButton serviceSlug={service.slug} className="w-full" />
+              <GoldButton className="w-full">Get my custom quote</GoldButton>
             </div>
           </Reveal>
         </div>

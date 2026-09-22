@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -23,6 +23,15 @@ import {
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// A single classy serif accent, used sparingly (the hero eyebrow) rather
+// than as a second body face — Inter still carries all the reading text.
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["italic"],
   display: "swap",
 });
 
@@ -93,7 +102,6 @@ const jsonLd = {
       email: EMAIL,
       image: `${siteUrl}/og-image.jpg`,
       logo: `${siteUrl}/logo-mark.png`,
-      priceRange: "CA$1,900–CA$9,500",
       currenciesAccepted: "CAD",
       knowsLanguage: ["en", "es"],
       knowsAbout: [
@@ -192,7 +200,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
       <head>
         <script
           type="application/ld+json"

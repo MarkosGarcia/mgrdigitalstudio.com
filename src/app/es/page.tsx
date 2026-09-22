@@ -10,26 +10,23 @@ import { whatsappLink } from "@/lib/whatsapp";
 export const metadata: Metadata = {
   title: "Páginas web en Ottawa — en español",
   description:
-    "Diseño de páginas web para negocios pequeños en Ottawa. Atención en español, precios claros desde $1,900, y revisión gratuita de su página actual.",
+    "Diseño de páginas web para negocios pequeños en Ottawa. Atención en español, cotización personalizada, y revisión gratuita de su página actual.",
   alternates: { canonical: "https://mgrdigitalstudio.com/es" },
 };
 
 const servicios = [
   {
     nombre: "Página de una sola sección",
-    precio: "$1,900 – $3,200",
     detalle:
       "Una página enfocada en que la gente lo llame. Ideal si apenas está empezando o si necesita algo rápido.",
   },
   {
     nombre: "Página web completa",
-    precio: "$4,800 – $9,500",
     detalle:
       "De cuatro a ocho secciones: qué hace, dónde trabaja, por qué confiar en usted, y cómo contactarlo.",
   },
   {
     nombre: "Mantenimiento",
-    precio: "$199 – $349/mes",
     detalle:
       "Actualizaciones, respaldos, y cambios pequeños cuando los necesite. Para que su página no se quede abandonada.",
   },
@@ -115,22 +112,20 @@ export default function SpanishPage() {
         <div className="max-w-3xl mx-auto px-6">
           <Reveal className="mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-ink tracking-tight mb-5">
-              Precios.
+              Servicios.
             </h2>
             <p className="text-ink-3 leading-relaxed">
-              Le doy el precio exacto antes de empezar, por escrito.
+              Le doy un precio exacto por escrito después de platicar lo que
+              necesita — no antes.
             </p>
           </Reveal>
 
           <div className="border-t border-hair">
             {servicios.map((s, i) => (
               <Reveal key={s.nombre} delayMs={i * 60}>
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-8 py-6 border-b border-hair">
-                  <div className="sm:flex-1">
-                    <p className="text-ink font-semibold mb-1">{s.nombre}</p>
-                    <p className="text-sm text-ink-3 leading-relaxed">{s.detalle}</p>
-                  </div>
-                  <p className="text-sm text-gold font-medium shrink-0">{s.precio}</p>
+                <div className="py-6 border-b border-hair">
+                  <p className="text-ink font-semibold mb-1">{s.nombre}</p>
+                  <p className="text-sm text-ink-3 leading-relaxed">{s.detalle}</p>
                 </div>
               </Reveal>
             ))}
