@@ -7,6 +7,9 @@ export type Service = {
   longDescription: string;
   features: string[];
   idealFor: string[];
+  /** The four core offers shown in "What we do". Everything else is listed
+   *  as a supporting service. */
+  featured?: boolean;
 };
 
 /**
@@ -15,11 +18,99 @@ export type Service = {
  * real person. Every page instead points to a call or the contact form,
  * where the actual scope gets discussed before a number does.
  *
- * Internal reference only, never rendered: landing pages ~$1,900–$3,200,
- * business websites ~$4,800–$9,500, website care ~$199–$349/month, website
- * growth ~$1,300–$2,600/month.
+ * Internal reference only, never rendered: local SEO setup ~$750–$1,500 then
+ * ~$450–$950/month; AI search optimization usually bundled into local SEO
+ * (~$250–$500/month on its own); review growth setup ~$350–$600; landing
+ * pages ~$1,900–$3,200; business websites ~$4,800–$9,500; website care
+ * ~$199–$349/month; website growth ~$1,300–$2,600/month.
  */
 export const services: Service[] = [
+  {
+    slug: "local-seo",
+    name: "Local SEO & Google Maps",
+    shortName: "Local SEO",
+    featured: true,
+    tagline: "Show up in the map results, where the calls are.",
+    description:
+      "Your Google Business Profile, local listings and service-area pages, tuned so you show up in the map results when someone nearby searches for what you do.",
+    longDescription:
+      "When someone nearby searches for what you do, Google shows a map with three businesses before it shows a single website — and most of the calls go to those three. Getting into that group isn't a trick. It's a complete, accurate, active Google Business Profile; the same name, address and phone number everywhere your business is listed; a website that clearly says what you do and where; and a steady stream of real reviews. We do all of it, then keep at it month after month, because your competitors aren't standing still either.",
+    features: [
+      "Google Business Profile fully optimized — categories, services, photos, posts",
+      "Consistent listings across the directories Google cross-checks",
+      "Service and area pages on your website",
+      "Map-ranking checks across your whole service area",
+      "A plain-English report every month",
+    ],
+    idealFor: [
+      "Trades and home services",
+      "Clinics, salons and studios",
+      "Any business customers find with “near me”",
+    ],
+  },
+  {
+    slug: "ai-search-optimization",
+    name: "AI Search Optimization",
+    shortName: "AI search",
+    featured: true,
+    tagline: "Be the answer when someone asks AI instead of Google.",
+    description:
+      "More people now ask ChatGPT, Gemini or Google's AI answers who to call. We make your business easy for those assistants to find, understand and recommend.",
+    longDescription:
+      "A growing share of people skip the search results entirely and ask an AI assistant: “who's a good plumber in Kanata?” Those assistants pull from your website, your Google profile, your reviews and the directories that mention you — and they recommend the businesses they can understand clearly and trust. AI search optimization makes sure they can: structured data on your site, plain answers to the questions customers actually ask, and the same facts about you everywhere you're mentioned. Nobody can promise an AI will name you. You can stop giving it reasons not to.",
+    features: [
+      "Structured data so AI reads your business correctly",
+      "Answer-first content for the questions customers really ask",
+      "Consistent business facts across the web",
+      "Regular checks of what ChatGPT, Gemini and Google's AI say about you",
+      "Works hand in hand with local SEO",
+    ],
+    idealFor: [
+      "Businesses already investing in local SEO",
+      "Services people ask for advice about",
+      "Owners who want to get ahead early",
+    ],
+  },
+  {
+    slug: "business-websites",
+    name: "Websites That Convert",
+    shortName: "Websites",
+    featured: true,
+    tagline: "The site every search sends people to.",
+    description:
+      "Fast, mobile-first websites that make it obvious what you do, where you work and how to call — the foundation every search sends people to.",
+    longDescription:
+      "Every ranking ends in the same place: someone tapping through to your website and deciding in a few seconds whether to call. A good site answers that fast — here's what you do, here's the area you cover, here's proof you're real, here's the button to call. It's also what Google and AI assistants read to understand your business, so it's built for them too: clean structure, fast loading, and the right details in the right places.",
+    features: [
+      "Written and designed around getting the call",
+      "Built for phones first, fast on mobile data",
+      "Structured for Google and AI search from day one",
+      "You can edit the text yourself",
+      "Hosting and launch handled",
+    ],
+    idealFor: ["Trades and home services", "Clinics and practices", "Anyone whose site is five years old"],
+  },
+  {
+    slug: "review-growth",
+    name: "Review Growth",
+    shortName: "Reviews",
+    featured: true,
+    tagline: "More real reviews, without having to remember to ask.",
+    description:
+      "A simple system that asks every customer for a Google review at the right moment — reviews are one of the biggest factors in who gets picked first.",
+    longDescription:
+      "Reviews do two jobs at once. They're one of the strongest signals behind who shows up first in the map results, and they're what a stranger reads before deciding to call. Most satisfied customers would happily leave one — nobody asks them at the right moment. Review growth sets up that ask: your own short review link and QR code, a friendly text or email after each job, and help replying to every review you get, good or bad. Real customers and honest reviews only — no buying them, and no filtering out the unhappy ones.",
+    features: [
+      "Your own short review link and QR code",
+      "Automatic review request by text or email after each job",
+      "Reply templates written in your voice",
+      "Review count and rating tracked every month",
+    ],
+    idealFor: [
+      "Good businesses with too few reviews",
+      "Anyone losing calls to a competitor with more stars",
+    ],
+  },
   {
     slug: "landing-pages",
     name: "Landing Pages",
@@ -37,24 +128,6 @@ export const services: Service[] = [
       "Set up so you can see what's working",
     ],
     idealFor: ["Google or Facebook ads", "A seasonal promotion", "Launching one new service"],
-  },
-  {
-    slug: "business-websites",
-    name: "Business Websites",
-    shortName: "Business websites",
-    tagline: "The site people find when they look you up.",
-    description:
-      "Usually four to eight pages: what you do, who you are, proof you're real, and an obvious way to get in touch.",
-    longDescription:
-      "Most people will check your website before they call you. They're not reading it closely — they're deciding in a few seconds whether you look like a real business worth phoning. A good site answers that fast: here's what you do, here's the area you cover, here's what it costs, here's the button to call. That's most of the job.",
-    features: [
-      "Four to eight pages, written and designed",
-      "Built for phones first",
-      "Set up to show in local search",
-      "You can edit the text yourself",
-      "Hosting and launch handled",
-    ],
-    idealFor: ["Trades and home services", "Clinics and practices", "Anyone whose site is five years old"],
   },
   {
     slug: "website-care",
@@ -97,26 +170,13 @@ export const services: Service[] = [
 export type Capability = { name: string; description: string };
 
 /**
- * The broader toolkit — real skills, not fixed-price packages like the four
- * above. These get scoped on a call rather than quoted sight-unseen, so they
+ * The broader toolkit — real skills, not core offers like the four above. These get scoped on a call rather than quoted sight-unseen, so they
  * show up as a plain list rather than another set of "starting at" cards.
  */
 export const capabilities: Capability[] = [
   {
-    name: "SEO",
-    description: "Getting found in Google for what you actually do, not just your business name.",
-  },
-  {
-    name: "Google Business Profile Optimization",
-    description: "The map listing that shows up before your website does, filled in properly and kept current.",
-  },
-  {
     name: "Conversion Optimization",
     description: "Turning the traffic you already get into more calls and bookings, without spending more on ads.",
-  },
-  {
-    name: "AI Search Optimization",
-    description: "Showing up when someone asks ChatGPT or Google's AI answers instead of typing a search.",
   },
   {
     name: "Marketing",
@@ -249,9 +309,29 @@ export const faqs: FaqItem[] = [
       "New — I started in 2026 and I'm still building my client roster. You can see the sites I've built on the Work page and visit them yourself. That also means you get more attention than you would from a shop with forty accounts on the go. If you'd rather hire someone with fifteen years of case studies, that's a completely reasonable call and I won't try to talk you out of it.",
   },
   {
+    question: "Can you guarantee I'll be #1 on Google?",
+    answer:
+      "No — and be wary of anyone who does. Google decides rankings, and it says so itself. What I can promise is the work that moves rankings: a properly optimized Google Business Profile, consistent listings, a website that makes your business clear, and a steady flow of real reviews. You'll see exactly where you rank before we start and every month after, so you can judge the results yourself.",
+  },
+  {
+    question: "How long until I see results?",
+    answer:
+      "Fixing an incomplete Google Business Profile can move things within a few weeks. Climbing in a competitive category or area usually takes three to six months of steady work. I'll tell you honestly, based on the audit, which of those you're looking at before you spend anything.",
+  },
+  {
+    question: "What is AI search optimization, really?",
+    answer:
+      "More people now ask ChatGPT, Gemini or Google's AI answers who to call instead of scrolling through results. Those assistants build their answers from your website, your Google profile, your reviews and the directories that mention you. AI search optimization makes all of that clear, consistent and easy for them to read — structured data, plain answers to common questions, and matching facts everywhere. It's the same foundation as good local SEO, taken one step further.",
+  },
+  {
+    question: "Do I need a new website to do local SEO?",
+    answer:
+      "Not necessarily. A lot of local SEO happens on your Google Business Profile and in listings, not on your site. But if your website is slow, unclear, or doesn't say what you do and where, it holds everything else back — and I'll tell you if that's the case, even when the answer is the cheaper one.",
+  },
+  {
     question: "How much does it cost?",
     answer:
-      "It depends on what you actually need — the number of pages, whether you need the writing done, and what happens after launch. Rather than publish a figure that's wrong for your situation, I'll ask a few questions on a free call or through the quote request form and come back with a fixed, itemized number. No hourly billing, no surprises, no obligation to say yes.",
+      "It depends on what you actually need — how competitive your area is, whether the website needs work, and how much ongoing help you want. Local SEO is usually a one-time setup and then a monthly plan; websites are a one-time project. Rather than publish a figure that's wrong for your situation, I'll start with the free audit and come back with a fixed, itemized number. No hourly billing, no surprises, no obligation to say yes.",
   },
   {
     question: "How long does it take?",
@@ -279,9 +359,9 @@ export const faqs: FaqItem[] = [
       "Then the first question is whether it needs replacing or just fixing. Sometimes it's a rebuild. Sometimes it's a faster host, a clearer homepage, and a phone number people can actually find. I'll tell you which one it is, even when the answer is the cheaper one.",
   },
   {
-    question: "What happens on the free review?",
+    question: "What's in the free visibility audit?",
     answer:
-      "You send me your site and what you want more of. I spend an hour or so on it and send back two or three specific things I'd change and why. No slide deck, no score out of 100. If you want me to do the work, there's a quote at the bottom. If you don't, keep the list and do it yourself.",
+      "You tell me your business, what customers search for, and the area you serve. I check where you actually show up — Google Maps across your area, regular search results, and what AI assistants say when asked for someone like you — plus your Google Business Profile, reviews and website. You get back a short, plain-English summary: where you stand, the two or three things holding you back, and what I'd fix first. No automated score out of 100. If you want me to do the work, there's a quote at the bottom. If not, the list is yours."
   },
 ];
 
@@ -289,24 +369,24 @@ export type ProcessStep = { title: string; description: string };
 
 export const processSteps: ProcessStep[] = [
   {
-    title: "A call",
+    title: "Free visibility audit",
     description:
-      "Twenty minutes on what your business does, who calls you, and what you wish happened more often.",
+      "We check where you show up on Google Maps, in regular search and in AI answers across your area — and what's holding you back.",
   },
   {
-    title: "A fixed quote",
+    title: "A fixed plan and quote",
     description:
-      "What I'd build, what it costs, and when it's done. One page, no retainer language to decode.",
+      "What we'd fix first, what it costs, and what you can realistically expect. No hourly meter, no long contract to decode.",
   },
   {
-    title: "Build and review",
+    title: "Fix the foundation",
     description:
-      "You see the real site on a private link partway through, not a mockup. Changes happen there.",
+      "Google Business Profile, listings, website and review system set up properly. Most of this happens in the first few weeks.",
   },
   {
-    title: "Launch, then check in",
+    title: "Climb, and keep climbing",
     description:
-      "I handle the domain and hosting switch. A few weeks later I look at what's actually happening on it.",
+      "Monthly work on rankings, content and reviews, with a plain-English report on where you moved and what's next.",
   },
 ];
 
@@ -322,8 +402,8 @@ export const notAFit: string[] = [
 ];
 
 export const aFit: string[] = [
+  "You're a good local business that doesn't show up when people nearby search for what you do.",
   "You run a small business and your website isn't pulling its weight.",
-  "You'd rather have four pages that work than twelve that don't.",
   "You want to talk to the person actually building it.",
   "You want it done fast — some projects have gone live the very next day.",
 ];

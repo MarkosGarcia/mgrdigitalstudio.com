@@ -64,7 +64,7 @@ export default function OttawaTradesPage() {
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <Magnetic>
                 <GoldButton size="lg" className="w-full sm:w-auto">
-                  Get a free website review
+                  Get my free visibility audit
                 </GoldButton>
               </Magnetic>
               <a

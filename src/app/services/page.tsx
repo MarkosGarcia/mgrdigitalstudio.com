@@ -8,7 +8,7 @@ import { ParallaxBackground } from "@/components/ParallaxBackground";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Landing pages, business websites, website care and ongoing improvement work, plus SEO, Google Business Profile optimization, conversion optimization, AI search optimization, marketing, marketing automation, analytics and paid advertising. Custom-scoped engagements — request a quote after a short call.",
+    "Local SEO and Google Maps, AI search optimization, websites that convert and review growth for local businesses in Ottawa and beyond — plus landing pages, website care, conversion optimization, marketing automation, analytics and paid advertising. Start with a free visibility audit.",
 };
 
 export default function ServicesPage() {
@@ -22,13 +22,14 @@ export default function ServicesPage() {
               Services
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-ink tracking-tight leading-[1.1] mb-7">
-              Two ways to build it. Two ways to keep it working.
+              Get found first. Get chosen. Get the call.
             </h1>
             <p className="text-lg text-ink-3 leading-relaxed">
-              For businesses that want a full digital partner, not just a
-              website. Every project gets a fixed quote scoped to what you
-              actually need, worked out on a short call — no hourly meter,
-              no guessing from a price list.
+              Four core services built around one goal: when someone nearby
+              searches for what you do, on Google or with an AI assistant,
+              they find you first and call. Every engagement starts with a
+              free visibility audit and a fixed quote — no hourly meter, no
+              lock-in.
             </p>
           </Reveal>
         </div>
@@ -36,10 +37,12 @@ export default function ServicesPage() {
 
       <section className="pb-24 md:pb-32 bg-transparent">
         <div className="max-w-3xl mx-auto px-6 border-t border-hair">
-          {services.map((service, i) => (
+          {services.filter((s) => s.featured).map((service, i) => (
             <Reveal key={service.slug} delayMs={i * 80}>
               <div className="py-10 border-b border-hair">
-                <h2 className="text-xl font-semibold text-ink mb-4">{service.name}</h2>
+                <p className="text-xs font-mono text-gold mb-2">{String(i + 1).padStart(2, "0")}</p>
+                <h2 className="text-2xl font-bold text-ink tracking-tight mb-2">{service.name}</h2>
+                <p className="text-sm font-medium text-ink-2 mb-4">{service.tagline}</p>
                 <p className="text-sm text-ink-3 leading-relaxed mb-6">
                   {service.longDescription}
                 </p>
@@ -65,16 +68,21 @@ export default function ServicesPage() {
               Also part of the toolkit
             </p>
             <h2 className="text-2xl md:text-3xl font-bold text-ink tracking-tight leading-tight mb-4">
-              SEO, marketing, and everything that gets you found.
+              Landing pages, care, and the rest of the toolkit.
             </h2>
             <p className="text-sm text-ink-3 leading-relaxed mb-10 max-w-xl">
-              These get scoped on a call rather than quoted sight-unseen —
-              most often bundled into a Business Website or a Website Growth
-              plan, not sold on their own.
+              Supporting services, usually added alongside one of the four
+              above rather than sold on their own. All scoped on a call.
             </p>
           </Reveal>
 
           <Reveal delayMs={80} className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            {services.filter((s) => !s.featured).map((s) => (
+              <Link key={s.slug} href={`/services/${s.slug}`} className="group">
+                <h3 className="text-sm font-semibold text-ink mb-1 group-hover:text-gold transition-colors">{s.name} →</h3>
+                <p className="text-sm text-ink-3 leading-relaxed">{s.description}</p>
+              </Link>
+            ))}
             {capabilities.map((c) => (
               <div key={c.name}>
                 <h3 className="text-sm font-semibold text-ink mb-1">{c.name}</h3>

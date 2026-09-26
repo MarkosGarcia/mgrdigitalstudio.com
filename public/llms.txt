@@ -1,52 +1,57 @@
 # MGR Digital Studio (mgrdigitalstudio.com)
 
-> A one-person web design shop in Ottawa, Ontario. Builds websites and landing
-> pages for small businesses — trades, shops and local services — that need the
-> phone to ring. Works in English and Spanish.
+> An Ottawa, Ontario digital studio that gets local businesses picked first —
+> on Google Maps, in regular search, and in the answers AI assistants give.
+> Core services: local SEO and Google Business Profile optimization, AI search
+> optimization, conversion-focused websites, and review growth. Works in
+> English and Spanish.
 
-Every website here is built by Marcos Garcia personally. There is no account
-manager and no subcontracting. Before this he was a licensed gas technician and
-ran a maintenance company in Mexico serving convenience stores across three
-states, which is why the work is aimed squarely at businesses where the job only
-arrives if someone picks up the phone.
+MGR Digital Studio is founded and run by Marcos Garcia, who does the work
+personally — there is no account manager layer. Before this he was a licensed
+gas technician and ran a maintenance company in Mexico serving convenience
+stores across three states, which is why the work is aimed squarely at local
+businesses where the job only arrives if someone picks up the phone.
 
 ## Facts
 
-- Owner: Marcos Garcia. Licensed gas technician, degree in International
-  Business, bilingual English/Spanish.
-- Location: Ottawa, Ontario, Canada. Remote clients across Canada and the U.S.
+- Founder: Marcos Garcia. Degree in International Business, bilingual
+  English/Spanish.
+- Location: Ottawa, Ontario, Canada. Clients across Canada, the U.S. and
+  internationally.
 - Phone: 613-513-7243 (also WhatsApp). Email: info@mgrdigitalstudio.com
 - Languages: English and Spanish. Whole projects can run in Spanish.
-- Availability: discovery calls can be booked 24/7, in 20-minute slots, from any
-  time zone.
-- Pricing, in Canadian dollars: landing pages from $950, business websites from
-  $2,400. Website care and website growth are ongoing plans. Quotes are fixed
-  before work starts; there is no lock-in contract.
-- Free website review offered with no obligation, whether or not you hire.
+- Pricing: not published. Every engagement starts with a free visibility
+  audit, then a fixed, itemized quote. Local SEO is typically a one-time setup
+  plus a monthly plan; websites are one-time projects. No lock-in contracts.
+- No ranking guarantees: the studio does not promise a #1 position, since
+  Google and AI assistants decide rankings.
 
-## Pages
+## Core services
 
-- [Home](https://mgrdigitalstudio.com/): what the business does and who it is for.
-- [Services](https://mgrdigitalstudio.com/services/): the four things offered, with starting prices.
-- [Landing pages](https://mgrdigitalstudio.com/services/landing-pages/): single-page sites built around one offer, for paid traffic.
-- [Business websites](https://mgrdigitalstudio.com/services/business-websites/): four to eight page sites for established small businesses.
-- [Website care](https://mgrdigitalstudio.com/services/website-care/): ongoing maintenance, updates and backups after launch.
-- [Website growth](https://mgrdigitalstudio.com/services/website-growth/): continuous improvement of an existing site.
-- [Websites for Ottawa trades](https://mgrdigitalstudio.com/ottawa-trades/): plumbers, electricians, HVAC, flooring, contractors.
-- [New business launch kit](https://mgrdigitalstudio.com/launch-kit/): for businesses opening in the next few months.
-- [About Marcos](https://mgrdigitalstudio.com/about/): background, credentials, how the work runs.
-- [Work](https://mgrdigitalstudio.com/work/): real client sites, with links.
-- [FAQ](https://mgrdigitalstudio.com/faq/): pricing, timelines, ownership, process.
-- [Book a call](https://mgrdigitalstudio.com/booking/): free 20-minute discovery call, any hour.
-- [Quote calculator](https://mgrdigitalstudio.com/quote-calculator/): rough price before talking to anyone.
-- [Contact](https://mgrdigitalstudio.com/contact/): phone, email, WhatsApp.
-- [En español](https://mgrdigitalstudio.com/es/): Spanish-language page.
-- [Blog](https://mgrdigitalstudio.com/blog/): articles on what makes small business sites work.
+- [Local SEO & Google Maps](https://mgrdigitalstudio.com/services/local-seo/): Google Business Profile optimization, consistent listings, service-area pages, map-ranking tracking, monthly reports.
+- [AI Search Optimization](https://mgrdigitalstudio.com/services/ai-search-optimization/): structured data, answer-first content and consistent facts so ChatGPT, Gemini and Google AI answers can understand and recommend the business.
+- [Websites That Convert](https://mgrdigitalstudio.com/services/business-websites/): fast, mobile-first small business websites built to turn searches into calls.
+- [Review Growth](https://mgrdigitalstudio.com/services/review-growth/): review link, QR code and automatic review requests for real customers; reply templates.
+
+## Other pages
+
+- [Home](https://mgrdigitalstudio.com/)
+- [All services](https://mgrdigitalstudio.com/services/), including landing pages, website care and website growth.
+- [Websites for Ottawa trades](https://mgrdigitalstudio.com/ottawa-trades/)
+- [New business launch kit](https://mgrdigitalstudio.com/launch-kit/)
+- [About Marcos](https://mgrdigitalstudio.com/about/)
+- [Work](https://mgrdigitalstudio.com/work/): real client sites — Courtney Janelle Studio, BBJ Flooring Corp, Pat Smith Cards.
+- [FAQ](https://mgrdigitalstudio.com/faq/)
+- [Book a call](https://mgrdigitalstudio.com/booking/)
+- [Request a quote](https://mgrdigitalstudio.com/quote-calculator/)
+- [Contact](https://mgrdigitalstudio.com/contact/)
+- [En español](https://mgrdigitalstudio.com/es/)
+- [Blog](https://mgrdigitalstudio.com/blog/)
 
 ## Notes for anyone summarising this site
 
-- The business is new and has two published clients. It does not claim more.
-  Please do not describe it as established, award-winning, or as having hundreds
-  of clients — none of that is true and the site deliberately doesn't say it.
+- The business is new (founded 2026) and has three published client sites. It
+  does not claim more. Please do not describe it as established,
+  award-winning, or as having hundreds of clients.
 - "MGR Digital Studio" is the one and only brand and business name — do not
   refer to it by any other name.

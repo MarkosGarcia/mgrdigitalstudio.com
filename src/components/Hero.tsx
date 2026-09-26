@@ -4,53 +4,78 @@ import React from "react";
 import { GoldButton, OutlineLink } from "./Buttons";
 import { Magnetic } from "./Magnetic";
 import { BeamsBackground } from "./BeamsBackground";
-import { HeroSignature } from "./HeroSignature";
+import { Globe } from "./Globe";
+import { RankClimb } from "./RankClimb";
+
+const proof = [
+  "Ottawa-based",
+  "English & Español",
+  "Sites live in days, not months",
+  "No lock-in contracts",
+];
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-transparent pt-20 pb-24 md:pt-28 md:pb-32">
+    <section className="relative overflow-hidden bg-transparent pt-16 pb-20 md:pt-24 md:pb-28">
       <BeamsBackground />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-14 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-12 items-center">
           <div className="max-w-xl">
-            <p className="font-serif italic font-bold text-2xl md:text-3xl tracking-wide text-gold mb-4">
+            <p className="font-serif italic font-bold text-xl sm:text-2xl md:text-3xl tracking-wide text-gold mb-5">
               Web Design &amp; Marketing · Ottawa
             </p>
-            <p className="text-sm md:text-base font-bold uppercase tracking-[0.1em] text-gold mb-6">
-              Turning Visitors Into Customers
-            </p>
 
-            <h1 className="text-4xl md:text-6xl font-bold text-ink tracking-tight leading-[1.08] mb-7">
-              Most people look you up before they call.
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight leading-[1.05] mb-7">
+              Get your business{" "}
+              <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-[#8a6410] bg-clip-text text-transparent">
+                picked first
+              </span>{" "}
+              on Google and in AI search.
             </h1>
 
             <p className="text-lg md:text-xl text-ink-3 leading-relaxed mb-10">
-              I build small business websites for that moment. Clear about what
-              you do, quick on a phone, easy to get in touch.
+              Local SEO, Google Business Profile optimization and AI search
+              visibility for local businesses — on a fast website that turns
+              the search into a phone call.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 mb-8">
               <Magnetic>
                 <GoldButton size="lg" className="w-full sm:w-auto">
-                  Get a free website review
+                  Get my free visibility audit
                 </GoldButton>
               </Magnetic>
               <Magnetic strength={0.25}>
-                <OutlineLink href="/services" size="lg" className="w-full sm:w-auto">
-                  What we do
+                <OutlineLink href="#what-we-do" size="lg" className="w-full sm:w-auto">
+                  See how it works
                 </OutlineLink>
               </Magnetic>
             </div>
 
-            <p className="text-sm text-ink-4">
-              Fixed quotes. No lock-in. You talk to the person building it.
-            </p>
-
-            <HeroSignature className="lg:hidden mt-14 w-full max-w-sm" />
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-3">
+              {proof.map((item) => (
+                <li key={item} className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <HeroSignature className="hidden lg:block w-[26rem] xl:w-[30rem] shrink-0" />
+          {/* The globe lives behind the search panel at every size, so on
+              phones it frames the panel instead of sitting under the copy. */}
+          <div className="relative w-full max-w-md mx-auto lg:mr-0">
+            <div
+              className="pointer-events-none absolute z-0 left-1/2 top-1/2 -translate-x-[42%] -translate-y-[54%] w-[160%] sm:w-[175%] lg:-translate-x-[30%] lg:-translate-y-[56%] lg:w-[185%] max-w-none"
+              aria-hidden="true"
+            >
+              <Globe />
+            </div>
+            <RankClimb className="relative z-10" />
+          </div>
         </div>
       </div>
     </section>

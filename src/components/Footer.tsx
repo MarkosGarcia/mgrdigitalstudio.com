@@ -15,10 +15,11 @@ const columns: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: "Services",
     links: [
+      { href: "/services/local-seo", label: "Local SEO & Google Maps" },
+      { href: "/services/ai-search-optimization", label: "AI Search Optimization" },
+      { href: "/services/business-websites", label: "Websites That Convert" },
+      { href: "/services/review-growth", label: "Review Growth" },
       { href: "/services/landing-pages", label: "Landing Pages" },
-      { href: "/services/business-websites", label: "Business Websites" },
-      { href: "/services/website-care", label: "Website Care" },
-      { href: "/launch-kit", label: "New Business Launch Kit" },
       { href: "/quote-calculator", label: "Request a Quote" },
     ],
   },
@@ -26,6 +27,7 @@ const columns: { title: string; links: { href: string; label: string }[] }[] = [
     title: "Who we help",
     links: [
       { href: "/ottawa-trades", label: "Ottawa Trades" },
+      { href: "/launch-kit", label: "New Business Launch Kit" },
       { href: "/es", label: "Sitios web en español" },
       { href: "/work", label: "Our Work" },
       { href: "/reviews", label: "Reviews" },
@@ -54,9 +56,8 @@ export const Footer: React.FC = () => {
           <div>
             <Logo />
             <p className="mt-4 text-sm text-ink-3 max-w-xs leading-relaxed">
-              Websites for small businesses that need the phone to ring. Based
-              in Ottawa, Ontario — working with clients across Canada and the
-              U.S.
+              Local SEO, AI search optimization and websites that get local
+              businesses picked first. Based in Ottawa, Ontario.
             </p>
 
             <div className="mt-5 space-y-2 text-sm">

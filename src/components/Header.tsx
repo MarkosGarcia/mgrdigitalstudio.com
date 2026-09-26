@@ -8,8 +8,8 @@ import { PHONE_DISPLAY, PHONE_HREF, EMAIL, EMAIL_HREF } from "@/lib/business";
 
 const navLinks = [
   { href: "/services", label: "Services" },
-  { href: "/ottawa-trades", label: "For Trades" },
-  { href: "/launch-kit", label: "Launch Kit" },
+  { href: "/services/local-seo", label: "Local SEO" },
+  { href: "/services/ai-search-optimization", label: "AI Search" },
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -81,7 +81,7 @@ export const Header: React.FC = () => {
             <PhoneIcon />
             <span className="hidden xl:inline">{PHONE_DISPLAY}</span>
           </a>
-          <GoldButton>Free website review</GoldButton>
+          <GoldButton>Free visibility audit</GoldButton>
         </div>
 
         {/* Tap-to-call stays visible on mobile rather than living inside the
@@ -143,7 +143,7 @@ export const Header: React.FC = () => {
               {EMAIL}
             </a>
             <div onClick={() => setMobileMenuOpen(false)}>
-              <GoldButton className="w-full">Free website review</GoldButton>
+              <GoldButton className="w-full">Free visibility audit</GoldButton>
             </div>
           </div>
         </div>

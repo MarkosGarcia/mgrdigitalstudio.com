@@ -8,10 +8,11 @@ export const ProcessSteps: React.FC = () => {
       <div className="max-w-5xl mx-auto px-6">
         <Reveal className="max-w-2xl mb-14">
           <h2 className="text-3xl md:text-4xl font-bold text-ink tracking-tight mb-5">
-            How it goes.
+            How it works.
           </h2>
           <p className="text-ink-3 text-lg leading-relaxed">
-            Four steps, and you know the price before the second one.
+            From &ldquo;where do I actually stand?&rdquo; to climbing — and you
+            know the price before any work starts.
           </p>
         </Reveal>
 

@@ -87,7 +87,7 @@ export default async function ServiceDetailPage(
               {service.longDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
-              <GoldButton size="lg">Get a free website review</GoldButton>
+              <GoldButton size="lg">Get my free visibility audit</GoldButton>
               <OutlineLink href="/services" size="lg">
                 All services
               </OutlineLink>

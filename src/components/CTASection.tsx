@@ -9,8 +9,8 @@ export const CTASection: React.FC<{
   title?: string;
   subtitle?: string;
 }> = ({
-  title = "Send me your website.",
-  subtitle = "I'll come back with two or three specific things I'd change, and why. It's free, and it's useful whether you hire me or not.",
+  title = "Find out where you rank — free.",
+  subtitle = "Tell us your business and the area you serve. We'll check Google Maps, regular search and AI answers, then send back what's holding you back and what we'd fix first. Useful whether you hire us or not.",
 }) => {
   return (
     <section className="py-24 md:py-32 band border-t border-hair">
@@ -23,7 +23,7 @@ export const CTASection: React.FC<{
             {subtitle}
           </p>
           <Magnetic>
-            <GoldButton size="lg">Get a free website review</GoldButton>
+            <GoldButton size="lg">Get my free visibility audit</GoldButton>
           </Magnetic>
         </Reveal>
       </div>

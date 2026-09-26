@@ -22,7 +22,7 @@ const initialState: FormState = {
   name: "",
   email: "",
   phone: "",
-  primaryGoal: "More calls and leads",
+  primaryGoal: "Show up higher on Google Maps",
 };
 
 // Submissions go to our own /api/leads (Cloudflare Pages Function + D1 —
@@ -84,7 +84,7 @@ export const AssessmentModal: React.FC = () => {
     }
 
     const subject = encodeURIComponent(
-      `Website review request — ${form.businessName || "New lead"}`
+      `Visibility audit request — ${form.businessName || "New lead"}`
     );
     const body = encodeURIComponent(
       `Business Name: ${form.businessName}\n` +
@@ -138,7 +138,7 @@ export const AssessmentModal: React.FC = () => {
             </div>
             <h2 className="text-xl font-bold text-ink mb-2">Got it</h2>
             <p className="text-sm text-ink-3 mb-6">
-              We&apos;ll look at your site and email you back within a business day. If it turns out you don&apos;t need us, we&apos;ll say that too.
+              We&apos;ll check where you show up on Google Maps, in search and in AI answers, and email you back within two business days. If it turns out you don&apos;t need us, we&apos;ll say that too.
             </p>
             <button
               type="button"
@@ -154,10 +154,10 @@ export const AssessmentModal: React.FC = () => {
               id="assessment-modal-title"
               className="text-xl sm:text-2xl font-bold text-ink mb-1 tracking-tight"
             >
-              Free website review
+              Free visibility audit
             </h2>
             <p className="text-sm text-ink-3 mb-6">
-              Tell us where to look and what you want more of. You&apos;ll get back two or three specific things we&apos;d change, and why.
+              Tell us your business and the area you serve. We&apos;ll check where you show up on Google Maps, in search and in AI answers — and send back what&apos;s holding you back.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -222,21 +222,21 @@ export const AssessmentModal: React.FC = () => {
               </Field>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Field label="Industry" htmlFor="industry">
+                <Field label="What do customers search for?" htmlFor="industry">
                   <input
                     id="industry"
                     type="text"
-                    placeholder="e.g. Plumbing, Law, Dental"
+                    placeholder="e.g. plumber, dentist, flooring"
                     value={form.industry}
                     onChange={update("industry")}
                     className={inputClasses}
                   />
                 </Field>
-                <Field label="Location" htmlFor="location">
+                <Field label="Area you serve" htmlFor="location">
                   <input
                     id="location"
                     type="text"
-                    placeholder="City, Province/State"
+                    placeholder="e.g. Ottawa, Kanata, Orléans"
                     value={form.location}
                     onChange={update("location")}
                     className={inputClasses}
@@ -251,11 +251,11 @@ export const AssessmentModal: React.FC = () => {
                   onChange={update("primaryGoal")}
                   className={inputClasses}
                 >
-                  <option>More calls and leads</option>
-                  <option>More online bookings</option>
-                  <option>More e-commerce sales</option>
-                  <option>A full website redesign</option>
-                  <option>Ongoing optimization / growth</option>
+                  <option>Show up higher on Google Maps</option>
+                  <option>Get recommended by AI (ChatGPT, Gemini)</option>
+                  <option>More Google reviews</option>
+                  <option>More calls from my website</option>
+                  <option>A new website</option>
                   <option>Not sure yet</option>
                 </select>
               </Field>
@@ -275,7 +275,7 @@ export const AssessmentModal: React.FC = () => {
                 disabled={status === "submitting"}
                 className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 disabled:opacity-60 text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-[0_4px_20px_rgba(212,169,55,0.25)] transition-colors"
               >
-                {status === "submitting" ? "Sending..." : "Send it over"}
+                {status === "submitting" ? "Sending..." : "Get my free audit"}
               </button>
               <p className="text-xs text-ink-4 text-center">
                 One reply from a person. We won&apos;t add you to a mailing list.

@@ -28,7 +28,7 @@ export const GoldButton = React.forwardRef<
       onClick={open}
       className={`pressable lift inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-semibold rounded-xl shadow-[0_4px_20px_rgba(212,169,55,0.25)] ${sizeClasses[size]} ${className}`}
     >
-      {children ?? "Get a free website review"}
+      {children ?? "Get my free visibility audit"}
     </button>
   );
 });
