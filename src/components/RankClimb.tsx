@@ -28,6 +28,11 @@ const queries: Query[] = [
   { text: "best roofer near me", service: "roofing" },
 ];
 
+const longestService = queries.reduce(
+  (a, q) => (q.service.length > a.length ? q.service : a),
+  ""
+);
+
 type Row = { id: string; rating: string; bar: string };
 
 const competitors: Row[] = [
@@ -196,7 +201,7 @@ export const RankClimb: React.FC<{ className?: string }> = ({ className = "" }) 
 
         {/* AI answer: "thinking" while the climb runs, then the pick. */}
         <div
-          className={`mt-2 rounded-2xl border bg-white/80 p-3.5 min-h-[92px] transition-[border-color,box-shadow,opacity] duration-500 ${
+          className={`mt-2 rounded-2xl border bg-white/80 p-3.5 transition-[border-color,box-shadow,opacity] duration-500 ${
             fading ? "opacity-0" : "opacity-100"
           } ${atTop ? "border-violet-300/70 shadow-[0_8px_24px_-12px_rgba(109,40,217,0.35)]" : "border-hair"}`}
         >
@@ -206,22 +211,33 @@ export const RankClimb: React.FC<{ className?: string }> = ({ className = "" }) 
             </svg>
             AI assistant
           </p>
-          {atTop ? (
-            <p key={query.text} className="ai-answer-in text-sm text-ink-2 leading-snug">
-              For {query.service} in Ottawa, a top pick is{" "}
-              <span className="font-bold text-ink">Your Business</span> — 4.9★ from
+          {/* All states share one grid cell, sized by an invisible copy of
+              the longest answer, so the box never changes height. A height
+              change here shifted everything below it on every loop, and iOS
+              Safari has no scroll anchoring to hide that. */}
+          <div className="grid [&>*]:[grid-area:1/1]">
+            <p className="invisible text-sm leading-snug" aria-hidden="true">
+              For {longestService} in Ottawa, a top pick is{" "}
+              <span className="font-bold">Your Business</span> — 4.9★ from
               local reviews and open now.
             </p>
-          ) : (
-            <p className="flex items-center gap-2 text-sm text-ink-4">
-              Looking for the best match
-              <span className="typing-dots" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </span>
-            </p>
-          )}
+            {atTop ? (
+              <p key={query.text} className="ai-answer-in text-sm text-ink-2 leading-snug">
+                For {query.service} in Ottawa, a top pick is{" "}
+                <span className="font-bold text-ink">Your Business</span> — 4.9★ from
+                local reviews and open now.
+              </p>
+            ) : (
+              <p className="flex items-start gap-2 text-sm text-ink-4 leading-snug">
+                Looking for the best match
+                <span className="typing-dots mt-2" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

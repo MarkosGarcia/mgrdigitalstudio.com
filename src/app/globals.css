@@ -503,16 +503,16 @@ body {
 }
 
 .logo-sheen {
-  -webkit-mask-image: url("/logo-mark.png");
-  mask-image: url("/logo-mark.png");
+  -webkit-mask-image: url("/logo-mark.webp");
+  mask-image: url("/logo-mark.webp");
 }
 
 /* Same sweep, masked to the full icon+title+tagline lockup used in the
    hero card instead of the icon-only mark — the two images are different
    shapes, so the mask has to match whichever one sits behind it. */
 .logo-sheen-full {
-  -webkit-mask-image: url("/logo-full.png");
-  mask-image: url("/logo-full.png");
+  -webkit-mask-image: url("/logo-full.webp");
+  mask-image: url("/logo-full.webp");
 }
 
 .logo-sheen::after,

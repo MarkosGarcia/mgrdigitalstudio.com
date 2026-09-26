@@ -159,8 +159,10 @@ functions/api/    Cloudflare Pages Functions: leads.ts, bookings.ts,
 email-worker/     standalone Cloudflare Worker for outbound email
 schema.sql        D1 schema (already applied to mgrdigitalstudio-leads)
 public/
-  logo-mark.png   the gold MGR monogram, cut from the supplied artwork with
-                  real transparency (see git history for the cutout method)
+  logo-full.webp  full 3D gold logo with the services lines (studio section)
+  logo-lockup.webp monogram + "MGR DIGITAL STUDIO" (header and footer)
+  logo-mark.webp  monogram only; logo-mark.png is the same for JSON-LD
+  hero-silk*.webp AI-generated gold/ivory silk backdrop behind the hero
   marcos.jpg      real portrait, About page
   llms.txt        plain-language business facts for AI crawlers/answer engines
 ```

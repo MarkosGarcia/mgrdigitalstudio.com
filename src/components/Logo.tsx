@@ -12,10 +12,10 @@ export const LogoMark: React.FC<{ className?: string; animated?: boolean }> = ({
 }) => (
   <div className={`relative inline-block ${className}`} aria-hidden="true">
     <Image
-      src="/logo-mark.png"
+      src="/logo-mark.webp"
       alt=""
       width={700}
-      height={254}
+      height={314}
       priority
       className="w-full h-full object-contain drop-shadow-[0_4px_14px_rgba(15,23,42,0.12)]"
     />
@@ -33,10 +33,10 @@ export const Logo: React.FC<{ className?: string }> = ({
 }) => (
   <span className={`inline-block ${className}`}>
     <Image
-      src="/logo-lockup.png"
+      src="/logo-lockup.webp"
       alt="MGR Digital Studio"
-      width={700}
-      height={307}
+      width={520}
+      height={225}
       priority
       className="w-full h-full object-contain"
     />
