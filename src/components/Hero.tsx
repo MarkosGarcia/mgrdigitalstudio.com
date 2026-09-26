@@ -3,7 +3,7 @@
 import React from "react";
 import { GoldButton, OutlineLink } from "./Buttons";
 import { Magnetic } from "./Magnetic";
-import { BeamsBackground } from "./BeamsBackground";
+import { HeroBackdrop } from "./HeroBackdrop";
 import { Globe } from "./Globe";
 import { RankClimb } from "./RankClimb";
 
@@ -17,10 +17,10 @@ const proof = [
 export const Hero: React.FC = () => {
   return (
     <section className="relative overflow-hidden bg-transparent pt-16 pb-20 md:pt-24 md:pb-28">
-      <BeamsBackground />
+      <HeroBackdrop />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-4 lg:gap-12 items-center">
           <div className="max-w-xl">
             <p className="font-serif italic font-bold text-xl sm:text-2xl md:text-3xl tracking-wide text-gold mb-5">
               Web Design &amp; Marketing · Ottawa
@@ -65,11 +65,12 @@ export const Hero: React.FC = () => {
             </ul>
           </div>
 
-          {/* The globe lives behind the search panel at every size, so on
-              phones it frames the panel instead of sitting under the copy. */}
-          <div className="relative w-full max-w-md mx-auto lg:mr-0">
+          {/* Phones: the globe rises above the panel in its own space, with
+              the panel overlapping its lower half. Desktop: the globe sits
+              large behind the panel and peeks out around it. */}
+          <div className="relative w-full max-w-md mx-auto lg:mr-0 pt-44 sm:pt-56 lg:pt-0">
             <div
-              className="pointer-events-none absolute z-0 left-1/2 top-1/2 -translate-x-[42%] -translate-y-[54%] w-[160%] sm:w-[175%] lg:-translate-x-[30%] lg:-translate-y-[56%] lg:w-[185%] max-w-none"
+              className="pointer-events-none absolute z-0 left-1/2 top-0 -translate-x-1/2 w-[112%] sm:w-[125%] lg:top-1/2 lg:-translate-x-[30%] lg:-translate-y-[56%] lg:w-[185%] max-w-none"
               aria-hidden="true"
             >
               <Globe />

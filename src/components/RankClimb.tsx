@@ -98,11 +98,11 @@ export const RankClimb: React.FC<{ className?: string }> = ({ className = "" }) 
       aria-label="Animation: your business climbing from fifth place to first in local search results, then being recommended by an AI assistant."
       className={`relative ${className}`}
     >
-      <div className="absolute -inset-6 rounded-[2.5rem] bg-[#D4A937] opacity-[0.16] blur-3xl pointer-events-none" />
+      <div className="absolute -inset-10 pointer-events-none bg-[radial-gradient(closest-side,rgba(212,169,55,0.2),transparent)]" />
 
       <div
         aria-hidden="true"
-        className="relative rounded-3xl border border-hair glass glass-hero backdrop-blur-xl p-4 sm:p-5 shadow-[0_24px_60px_-20px_rgba(15,23,42,0.28)]"
+        className="rank-card relative rounded-3xl border border-hair p-4 sm:p-5"
       >
         {/* Search bar */}
         <div className="flex items-center gap-2.5 rounded-full bg-white/90 border border-hair px-4 py-2.5 shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
